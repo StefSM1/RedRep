@@ -1,0 +1,734 @@
+@import "tailwindcss";
+
+/* Enable class-based dark mode for Tailwind utilities */
+@custom-variant dark (&:is(.dark *));
+
+/* ============================================================
+   RedRep Design System — "Scholarly Neon"
+   Luxury Minimal + Retro-Futurist
+   ============================================================ */
+
+/* Fonts loaded via <link> in index.html for optimal performance */
+
+/* --- Theme Inline (Tailwind v4 token bridge) --- */
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-chart-1: var(--chart-1);
+  --color-chart-2: var(--chart-2);
+  --color-chart-3: var(--chart-3);
+  --color-chart-4: var(--chart-4);
+  --color-chart-5: var(--chart-5);
+  --color-sidebar: var(--sidebar);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-ring: var(--sidebar-ring);
+
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+
+  --font-display: "Space Grotesk", ui-sans-serif, system-ui, sans-serif;
+  --font-body: "DM Sans", ui-sans-serif, system-ui, sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, monospace;
+
+  /* --- Custom Animations --- */
+  --animate-fade-in: fade-in 0.6s ease-out forwards;
+  --animate-slide-up: slide-up 0.6s ease-out forwards;
+
+  @keyframes fade-in {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+
+  @keyframes slide-up {
+    from {
+      opacity: 0;
+      transform: translateY(24px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @keyframes marquee {
+    from {
+      transform: translateX(0);
+    }
+    to {
+      transform: translateX(-50%);
+    }
+  }
+}
+
+/* ============================================================
+   Light Mode — Warm Ivory
+   ============================================================ */
+:root {
+  /* Brand — Warm Amber Primary */
+  --primary: oklch(0.75 0.18 70);
+  --primary-foreground: oklch(0.15 0.02 70);
+
+  /* Surfaces — Warm Ivory */
+  --background: oklch(0.97 0.01 90);
+  --foreground: oklch(0.13 0.02 260);
+  --card: oklch(0.99 0.005 90);
+  --card-foreground: oklch(0.13 0.02 260);
+  --popover: oklch(0.99 0.005 90);
+  --popover-foreground: oklch(0.13 0.02 260);
+
+  /* Accents — Indigo-Emerald Gradient System */
+  --accent: oklch(0.55 0.2 270);
+  --accent-foreground: oklch(0.98 0.01 270);
+  --secondary: oklch(0.88 0.04 160);
+  --secondary-foreground: oklch(0.2 0.05 160);
+
+  /* Semantic */
+  --muted: oklch(0.93 0.01 260);
+  --muted-foreground: oklch(0.45 0.02 260);
+  --destructive: oklch(0.55 0.22 25);
+  --destructive-foreground: oklch(0.98 0.01 25);
+
+  /* System */
+  --border: oklch(0.88 0.01 260);
+  --input: oklch(0.88 0.01 260);
+  --ring: oklch(0.75 0.18 70);
+  --radius: 0.75rem;
+
+  /* Charts (bonus tokens for future use) */
+  --chart-1: oklch(0.75 0.18 70);
+  --chart-2: oklch(0.55 0.2 270);
+  --chart-3: oklch(0.65 0.15 160);
+  --chart-4: oklch(0.7 0.12 40);
+  --chart-5: oklch(0.6 0.18 330);
+
+  /* Sidebar tokens */
+  --sidebar: oklch(0.97 0.01 90);
+  --sidebar-foreground: oklch(0.13 0.02 260);
+  --sidebar-primary: oklch(0.75 0.18 70);
+  --sidebar-primary-foreground: oklch(0.15 0.02 70);
+  --sidebar-accent: oklch(0.93 0.01 260);
+  --sidebar-accent-foreground: oklch(0.13 0.02 260);
+  --sidebar-border: oklch(0.88 0.01 260);
+  --sidebar-ring: oklch(0.75 0.18 70);
+}
+
+/* ============================================================
+   Dark Mode — "Dusk Flow"
+   Neutral surfaces + unified red↔blue gradient accent system
+   Primary = dark charcoal (subtle), gradient = the star
+   ============================================================ */
+.dark {
+  /* Brand — Dark Charcoal (light black, blends with surface) */
+  --primary: oklch(0.28 0.02 260);
+  --primary-foreground: oklch(0.92 0.01 260);
+
+  /* Surfaces — Lifted Dark (idea 2: 3% lift for better box separation) */
+  --background: oklch(0.08 0.01 260);
+  --foreground: oklch(0.95 0.01 260);
+  --card: oklch(0.11 0.01 260);
+  --card-foreground: oklch(0.95 0.01 260);
+  --popover: oklch(0.11 0.01 260);
+  --popover-foreground: oklch(0.95 0.01 260);
+
+  /* Accents — Muted Purple (bridge between red & blue) */
+  --accent: oklch(0.5 0.15 270);
+  --accent-foreground: oklch(0.95 0.01 270);
+  --secondary: oklch(0.15 0.02 260);
+  --secondary-foreground: oklch(0.85 0.01 260);
+
+  /* Semantic */
+  --muted: oklch(0.15 0.02 260);
+  --muted-foreground: oklch(0.82 0.01 260);
+  --destructive: oklch(0.55 0.2 25);
+  --destructive-foreground: oklch(0.98 0.01 25);
+
+  /* System */
+  --border: oklch(0.22 0.02 260);
+  --input: oklch(0.22 0.02 260);
+  --ring: oklch(0.5 0.15 270);
+
+  /* Charts — gradient palette (red-orange → purple → azure) */
+  --chart-1: oklch(0.62 0.22 25);
+  --chart-2: oklch(0.58 0.2 230);
+  --chart-3: oklch(0.55 0.15 270);
+  --chart-4: oklch(0.5 0.12 40);
+  --chart-5: oklch(0.6 0.16 160);
+
+  /* Sidebar tokens dark */
+  --sidebar: oklch(0.09 0.01 260);
+  --sidebar-foreground: oklch(0.95 0.01 260);
+  --sidebar-primary: oklch(0.28 0.02 260);
+  --sidebar-primary-foreground: oklch(0.92 0.01 260);
+  --sidebar-accent: oklch(0.13 0.02 260);
+  --sidebar-accent-foreground: oklch(0.95 0.01 260);
+  --sidebar-border: oklch(0.19 0.02 260);
+  --sidebar-ring: oklch(0.5 0.15 270);
+}
+
+/* ============================================================
+   Base Layer — Typography & Global Resets
+   ============================================================ */
+@layer base {
+  *,
+  *::before,
+  *::after {
+    border-color: var(--border);
+  }
+
+  html {
+    scroll-behavior: smooth;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+  }
+
+  body {
+    margin: 0;
+    font-family: var(--font-body);
+    font-size: 1.0625rem;
+    line-height: 1.6;
+    color: var(--foreground);
+    background-color: var(--background);
+    font-feature-settings: "cv02", "cv03", "cv04", "cv11";
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    font-family: var(--font-display);
+    font-weight: 600;
+    line-height: 1.2;
+    letter-spacing: -0.02em;
+    color: var(--foreground);
+  }
+
+  h1 {
+    font-size: clamp(2.5rem, 5vw + 1rem, 4.5rem);
+    font-weight: 700;
+    letter-spacing: -0.04em;
+  }
+
+  h2 {
+    font-size: clamp(1.75rem, 3vw + 0.5rem, 2.75rem);
+    letter-spacing: -0.03em;
+  }
+
+  h3 {
+    font-size: clamp(1.25rem, 2vw + 0.25rem, 1.75rem);
+  }
+
+  p {
+    max-width: 65ch;
+    line-height: 1.7;
+  }
+
+  code,
+  pre {
+    font-family: var(--font-mono);
+  }
+
+  /* Focus ring for accessibility */
+  :focus-visible {
+    outline: 2px solid var(--ring);
+    outline-offset: 2px;
+  }
+
+  /* Selection color */
+  ::selection {
+    background-color: oklch(0.75 0.18 70 / 0.3);
+    color: inherit;
+  }
+
+  .dark ::selection {
+    background-color: oklch(0.55 0.15 270 / 0.35);
+  }
+
+  /* Reduced motion */
+  @media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+      scroll-behavior: auto !important;
+    }
+  }
+}
+
+/* ============================================================
+   Utility Classes — Design System Helpers
+   ============================================================ */
+@layer utilities {
+  /* --- Gradient Text (theme-aware) --- */
+  .text-gradient-primary {
+    background: linear-gradient(to right, var(--primary), var(--accent));
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+
+  .text-gradient-accent {
+    background: linear-gradient(to right, var(--accent), var(--primary));
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+
+  /* --- Glassmorphism --- */
+  .glass {
+    background: oklch(0.99 0.005 90 / 0.8);
+    backdrop-filter: blur(20px) saturate(1.2);
+    -webkit-backdrop-filter: blur(20px) saturate(1.2);
+    border: 1px solid oklch(0.88 0.01 260 / 0.5);
+  }
+
+  .dark .glass {
+    background: oklch(0.11 0.01 260 / 0.65);
+    backdrop-filter: blur(24px) saturate(1.6);
+    -webkit-backdrop-filter: blur(24px) saturate(1.6);
+    border: 1px solid oklch(0.22 0.02 260 / 0.5);
+  }
+
+  /* --- Liquid Glass ---
+     Frosted glass effect with strong backdrop blur, translucent surface,
+     visible border highlight, and inner shine for depth.
+     Lower background alpha = more of the colorful background shows through. */
+  .liquid-glass {
+    background: oklch(0.99 0.005 90 / 0.55);
+    backdrop-filter: blur(32px) saturate(1.4);
+    -webkit-backdrop-filter: blur(32px) saturate(1.4);
+    border: 1px solid oklch(1 0 0 / 0.22);
+    box-shadow:
+      inset 0 1px 0 oklch(1 0 0 / 0.2),
+      inset 0 -1px 0 oklch(0 0 0 / 0.03),
+      0 2px 8px oklch(0 0 0 / 0.06);
+    transition:
+      background 0.3s,
+      box-shadow 0.3s,
+      border-color 0.3s,
+      transform 0.3s;
+  }
+  .dark .liquid-glass {
+    background: oklch(0.09 0.01 260 / 0.50);
+    backdrop-filter: blur(40px) saturate(2);
+    -webkit-backdrop-filter: blur(40px) saturate(2);
+    border: 1px solid oklch(1 0 0 / 0.08);
+    box-shadow:
+      inset 0 1px 0 oklch(1 0 0 / 0.06),
+      inset 0 -1px 0 oklch(0 0 0 / 0.2),
+      0 4px 24px oklch(0 0 0 / 0.4);
+  }
+  .liquid-glass:hover {
+    background: oklch(0.99 0.005 90 / 0.62);
+    border-color: oklch(1 0 0 / 0.3);
+    transform: scale(1.02);
+  }
+  .dark .liquid-glass:hover {
+    background: oklch(0.11 0.01 260 / 0.58);
+    border-color: oklch(1 0 0 / 0.14);
+    transform: scale(1.02);
+  }
+
+  /* --- Glass Framed (stronger dark-mode border) ---
+     Adds a higher-opacity rim to liquid-glass panels so they read
+     as distinct framed panels while keeping the frosted body.
+     The opacity differential (0.14 vs body's inner highlight 0.06)
+     creates a "lit edge" effect against the constellation backdrop. */
+  .dark .liquid-glass.glass-framed {
+    border-color: oklch(1 0 0 / 0.14);
+  }
+  .dark .liquid-glass.glass-framed:hover {
+    border-color: oklch(1 0 0 / 0.2);
+  }
+
+  /* --- Surface Elevation --- */
+  .surface-elevated {
+    background: var(--card);
+    box-shadow:
+      0 1px 2px oklch(0 0 0 / 0.04),
+      0 4px 12px oklch(0 0 0 / 0.04);
+  }
+
+  .dark .surface-elevated {
+    background: oklch(0.09 0.01 260 / 0.5);
+    backdrop-filter: blur(20px) saturate(1.4);
+    -webkit-backdrop-filter: blur(20px) saturate(1.4);
+    box-shadow:
+      0 1px 2px oklch(0 0 0 / 0.4),
+      0 4px 12px oklch(0 0 0 / 0.35);
+  }
+
+  /* --- Atmospheric Dark Background ---
+     Pure black base. Decorative orbs and lines are rendered
+     as fixed HTML elements in AppShell for proper layering. */
+  .dark .dark-app-bg {
+    background-color: oklch(0.08 0.01 260);
+  }
+
+  /* Show fixed background decorations in dark mode */
+  .dark .dark-bg-decor {
+    opacity: 1 !important;
+  }
+
+  /* --- Light Mode Atmospheric Background ---
+     Warm ivory base with organic leaf/vine patterns and warm amber accents.
+     Rendered as fixed HTML elements in AppShell. */
+  .light-app-bg {
+    background-color: oklch(0.97 0.01 90);
+  }
+
+  /* Show light-mode background decorations (hidden in dark mode) */
+  .light-bg-decor {
+    opacity: 1;
+  }
+  .dark .light-bg-decor {
+    opacity: 0 !important;
+  }
+
+  /* --- Dark Mode Text Hierarchy --- */
+  /* Titles (h1-h4) stay white via --foreground; body text becomes light gray */
+  .dark p,
+  .dark li,
+  .dark span,
+  .dark label {
+    color: var(--muted-foreground);
+  }
+  /* Keep specific elements white when needed */
+  .dark h1,
+  .dark h2,
+  .dark h3,
+  .dark h4,
+  .dark .text-foreground {
+    color: var(--foreground);
+  }
+
+  /* --- Section Spacing --- */
+  .section-spacing {
+    padding-top: 6rem;
+    padding-bottom: 6rem;
+  }
+
+  @media (min-width: 768px) {
+    .section-spacing {
+      padding-top: 8rem;
+      padding-bottom: 8rem;
+    }
+  }
+
+  /* --- Stagger Animation Delays --- */
+  .stagger-1 {
+    animation-delay: 0.1s;
+  }
+  .stagger-2 {
+    animation-delay: 0.2s;
+  }
+  .stagger-3 {
+    animation-delay: 0.3s;
+  }
+  .stagger-4 {
+    animation-delay: 0.4s;
+  }
+  .stagger-5 {
+    animation-delay: 0.5s;
+  }
+  .stagger-6 {
+    animation-delay: 0.6s;
+  }
+
+  /* --- Hide scrollbar utility --- */
+  .scrollbar-hide {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+  .scrollbar-hide::-webkit-scrollbar {
+    display: none;
+  }
+
+  /* --- Accepted Answer Text (green/amber gradient) --- */
+  .text-accepted {
+    background: linear-gradient(
+      135deg,
+      oklch(0.65 0.18 160),
+      oklch(0.75 0.15 80)
+    );
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+
+  /* --- Infinite Marquee Animation --- */
+  .animate-marquee {
+    animation: marquee 30s linear infinite;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .animate-marquee {
+      animation: none;
+    }
+  }
+
+  /* --- Feature Card Illustration Animations --- */
+  @keyframes feature-bob {
+    0%,
+    100% {
+      transform: translateY(0);
+    }
+    50% {
+      transform: translateY(-3px);
+    }
+  }
+  @keyframes feature-pulse {
+    0%,
+    100% {
+      opacity: 1;
+    }
+    50% {
+      opacity: 0.5;
+    }
+  }
+  @keyframes feature-ring {
+    0%,
+    100% {
+      transform: scale(1);
+      opacity: 1;
+    }
+    50% {
+      transform: scale(1.08);
+      opacity: 0.6;
+    }
+  }
+  @keyframes feature-grow {
+    0%,
+    100% {
+      transform: scaleY(1);
+      transform-origin: bottom;
+    }
+    50% {
+      transform: scaleY(1.08);
+      transform-origin: bottom;
+    }
+  }
+
+  .feature-anim-bob {
+    animation: feature-bob 4s ease-in-out infinite;
+  }
+  .feature-anim-pulse {
+    animation: feature-pulse 3s ease-in-out infinite;
+  }
+  .feature-anim-ring {
+    animation: feature-ring 3.5s ease-in-out infinite;
+  }
+  .feature-anim-grow {
+    animation: feature-grow 4s ease-in-out infinite;
+  }
+
+  /* Hover glow overlay on feature cards */
+  .feature-card-glow {
+    background: radial-gradient(
+      ellipse at 70% 50%,
+      oklch(0.55 0.2 270 / 0.06) 0%,
+      transparent 70%
+    );
+  }
+  .dark .feature-card-glow {
+    background: radial-gradient(
+      ellipse at 70% 50%,
+      oklch(0.55 0.2 270 / 0.1) 0%,
+      transparent 70%
+    );
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .feature-anim-bob,
+    .feature-anim-pulse,
+    .feature-anim-ring,
+    .feature-anim-grow {
+      animation: none;
+    }
+  }
+
+  /* --- Solid Card (opaque, no blur — for Preview page) ---
+     Dark variant uses idea G: lifted surface (oklch 0.12) with an
+     inner top highlight so the card reads as a raised plane. */
+  .card-solid {
+    background: var(--card);
+    border: 1px solid var(--border);
+    box-shadow: 0 1px 3px oklch(0 0 0 / 0.06);
+    transition:
+      border-color 0.2s,
+      box-shadow 0.2s;
+  }
+  .dark .card-solid {
+    background: oklch(0.14 0.01 260);
+    border: 1px solid oklch(0.24 0.02 260);
+    box-shadow:
+      inset 0 1px 0 oklch(1 0 0 / 0.06),
+      0 1px 3px oklch(0 0 0 / 0.45);
+  }
+  .card-solid:hover {
+    border-color: oklch(0.75 0.18 70 / 0.3);
+    box-shadow: 0 2px 8px oklch(0 0 0 / 0.08);
+  }
+  .dark .card-solid:hover {
+    border-color: oklch(0.5 0.15 270 / 0.5);
+    box-shadow:
+      inset 0 1px 0 oklch(1 0 0 / 0.08),
+      0 4px 14px oklch(0 0 0 / 0.45);
+  }
+
+  /* --- Accent Glow Edge (idea H) ---
+     Adds a soft, colored glow on the side of a card using the
+     --card-glow custom property (an oklch color string, or 'transparent').
+     Pair with .card-solid. The glow lives in box-shadow so it stays
+     on top of the dim backdrop without bleeding across the page. */
+  .dark .card-glow {
+    box-shadow:
+      inset 0 1px 0 oklch(1 0 0 / 0.06),
+      inset 3px 0 18px -6px var(--card-glow, transparent),
+      0 1px 3px oklch(0 0 0 / 0.45);
+    transition:
+      box-shadow 0.25s ease,
+      transform 0.25s ease;
+  }
+  .dark .card-glow:hover {
+    box-shadow:
+      inset 0 1px 0 oklch(1 0 0 / 0.08),
+      inset 3px 0 22px -4px var(--card-glow, transparent),
+      0 4px 14px oklch(0 0 0 / 0.45);
+  }
+
+  /* --- Dot Grid Pattern (Preview route background) ---
+     Slightly stronger in dark mode (0.14 vs 0.10) so the lattice
+     actually reads on the dimmed backdrop. */
+  .bg-dot-grid {
+    background-image: radial-gradient(
+      circle,
+      oklch(0.55 0.02 260 / 0.18) 1px,
+      transparent 1px
+    );
+    background-size: 24px 24px;
+  }
+  .dark .bg-dot-grid {
+    background-image: radial-gradient(
+      circle,
+      oklch(0.95 0.01 260 / 0.14) 1px,
+      transparent 1px
+    );
+    background-size: 24px 24px;
+  }
+
+  /* --- Preview Route Tint (idea I) ---
+     Replaces the flat bg-background dimmer with a subtle top-warm →
+     bottom-cool gradient. Adds depth without competing with the
+     dot-grid or the card glows. */
+  .bg-preview-tint {
+    background: linear-gradient(
+      180deg,
+      oklch(0.97 0.01 90) 0%,
+      oklch(0.97 0.01 90) 100%
+    );
+  }
+  .dark .bg-preview-tint {
+    background: linear-gradient(
+      180deg,
+      oklch(0.10 0.02 30) 0%,
+      oklch(0.08 0.01 260) 45%,
+      oklch(0.085 0.02 250) 100%
+    );
+  }
+
+  /* --- Surface 1 (refinement: sub-header / sticky-bar elevation) ---
+     Sits between the page background and cards in the visual hierarchy.
+     Light: a very subtle warm tint lifted off the ivory page.
+     Dark:  noticeably lighter than --background but darker than --card,
+            so sticky bars / sub-headers read as a distinct plane
+            without competing with card content. */
+  .surface-1 {
+    background: oklch(0.99 0.005 90 / 0.85);
+    border-color: oklch(0.88 0.01 260 / 0.6);
+  }
+  .dark .surface-1 {
+    background: oklch(0.11 0.012 260);
+    border-color: oklch(0.22 0.02 260);
+    box-shadow:
+      inset 0 1px 0 oklch(1 0 0 / 0.04),
+      0 1px 2px oklch(0 0 0 / 0.35);
+  }
+
+  /* --- Sub-header warm tint (refinement: gradient bleed) ---
+     Continues the warm-top of .bg-preview-tint so sticky bars don't
+     "tear" the gradient. Light: a faint warm wash.
+     Dark:  bleeds the warm hue so the bar feels anchored to the page
+            top, not floating on flat dark. */
+  .bg-sub-header-tint {
+    background: linear-gradient(
+      180deg,
+      oklch(0.985 0.012 80) 0%,
+      oklch(0.99 0.005 90) 100%
+    );
+  }
+  .dark .bg-sub-header-tint {
+    background: linear-gradient(
+      180deg,
+      oklch(0.13 0.025 28) 0%,
+      oklch(0.10 0.015 260) 100%
+    );
+  }
+
+  /* --- Dark Mode Noise Grain (refinement: premium matte feel) ---
+     A 2-3% opacity SVG noise overlay applied to the fixed app shell
+     background. Breaks up flat gradients, gives surfaces a tactile
+     "matte" quality, and unifies Home + Preview dark modes.
+     Uses an inline data: URI SVG (no extra HTTP request). Light mode
+     keeps the grain invisible to preserve the warm ivory cleanliness. */
+  .app-noise {
+    position: relative;
+  }
+  .app-noise::after {
+    content: "";
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 0;
+    opacity: 0;
+    /* feTurbulence + feColorMatrix produces a monochrome grain */
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='240' height='240'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 1  0 0 0 0 1  0 0 0 0 1  0 0 0 0.6 0'/></filter><rect width='100%25' height='100%25' filter='url(%23n)'/></svg>");
+    background-size: 240px 240px;
+    mix-blend-mode: overlay;
+  }
+  .dark .app-noise::after {
+    opacity: 0.06;
+  }
+
+}

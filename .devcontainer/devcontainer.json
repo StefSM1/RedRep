@@ -1,0 +1,43 @@
+{
+  "name": "RedRep Development Workspace",
+  // Uses a stable, modern Node.js 22 Linux environment to completely bypass Windows/PowerShell path errors
+  "image": "mcr.microsoft.com/devcontainers/javascript-node:22-bookworm",
+  "features": {
+    // Ensures Git is fully configured inside the container
+    "ghcr.io/devcontainers/features/git:1": {}
+  },
+  // 🛠️ FIXED: Swapped out raw named volumes for local host folder bind mounts
+  "mounts": [
+    // Maps a local hidden cache directory on your machine to safely store all Cline extension data and login files
+    "source=${localWorkspaceFolder}/.devcontainer/cache/vscode-server,target=/home/node/.vscode-server,type=bind",
+    // Maps a second isolated cache folder to cleanly safeguard Qoder's environment data
+    "source=${localWorkspaceFolder}/.devcontainer/cache/qoder-server,target=/home/node/.qoder-server,type=bind"
+  ],
+  "customizations": {
+    "vscode": {
+      "settings": {
+        "editor.defaultFormatter": "esbenp.prettier-vscode",
+        "editor.formatOnSave": true,
+        "editor.codeActionsOnSave": {
+          "source.fixAll.eslint": "explicit"
+        },
+        // Optimizes Tailwind IntelliSense class matching for class-variance-authority used by shadcn/ui
+        "tailwindCSS.experimental.classRegex": [
+          ["cva\\(([^)]*)\\)", "[\"'`]([^\"'`]*)[\"'`]"]
+        ],
+        "terminal.integrated.defaultProfile.linux": "bash"
+      },
+      "extensions": [
+        "saoudrizwan.claude-dev", // 🛠️ FIXED: Correct marketplace ID for Cline to bypass the schema error
+        "bradlc.vscode-tailwindcss", // Critical for autocomplete in Tailwind v4
+        "esbenp.prettier-vscode", // Automatic code formatting
+        "dbaeumer.vscode-eslint", // Code linting and error checking
+        "dsznajder.es7-react-js-snippets" // Rapid React/TS component scaffolding snippets
+      ]
+    }
+  },
+  // Forwards Vite's default local development server port so you can view the live preview tab in your local browser
+  "forwardPorts": [5173],
+  // Prints a clear message once the sandbox environment is safely loaded
+  "postCreateCommand": "echo 'Linux Devcontainer active! Workspace isolated and ready for toolchain setup.'"
+}
