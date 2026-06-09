@@ -444,7 +444,6 @@ export function EncryptionSection() {
             const Icon = phase.icon;
             const isActive = i === currentPhase;
             const isCompleted = visiblePhases.includes(i) && !isActive;
-            const isUnseen = !visiblePhases.includes(i) && !isActive;
 
             return (
               <motion.div
