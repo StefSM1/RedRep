@@ -86,6 +86,7 @@ export function ContainerSection() {
   const [visibleStages, setVisibleStages] = useState<number[]>([]);
   const timeoutsRef = useRef<ReturnType<typeof setTimeout>[]>([]);
   const prevStageRef = useRef(-1);
+  const hasAutoPlayed = useRef(false);
 
   /* IntersectionObserver */
   const setRef = useCallback((node: HTMLElement | null) => {
@@ -97,6 +98,22 @@ export function ContainerSection() {
     );
     obs.observe(node);
   }, []);
+
+  /* Auto-play all stages once when section enters viewport */
+  useEffect(() => {
+    if (!hasEntered || hasAutoPlayed.current) return;
+    hasAutoPlayed.current = true;
+
+    const autoTimeouts: ReturnType<typeof setTimeout>[] = [];
+    let delay = 600;
+
+    for (let i = 0; i < STAGES.length; i++) {
+      autoTimeouts.push(setTimeout(() => setActiveStage(i), delay));
+      delay += PHASE_MS + PHASE_GAP;
+    }
+
+    return () => autoTimeouts.forEach(clearTimeout);
+  }, [hasEntered]);
 
   const clearAll = useCallback(() => {
     timeoutsRef.current.forEach(clearTimeout);

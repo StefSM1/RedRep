@@ -5,6 +5,7 @@ import { DataFlowSection } from './DataFlowSection';
 import { EncryptionSection } from './EncryptionSection';
 import { ContainerSection } from './ContainerSection';
 import { WebSocketSection } from './WebSocketSection';
+import { MonitoringSection } from './MonitoringSection';
 import { TeamSection } from './TeamSection';
 
 export function HomePage() {
@@ -30,6 +31,9 @@ export function HomePage() {
 
       {/* Real-Time Connections — WebSockets vs Polling */}
       <WebSocketSection />
+
+      {/* Monitoring & Observability — Production Health */}
+      <MonitoringSection />
 
       {/* About / Team */}
       <TeamSection />
