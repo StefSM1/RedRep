@@ -4,6 +4,7 @@ import { FeatureShowcase } from './FeatureShowcase';
 import { DataFlowSection } from './DataFlowSection';
 import { EncryptionSection } from './EncryptionSection';
 import { ContainerSection } from './ContainerSection';
+import { WebSocketSection } from './WebSocketSection';
 import { TeamSection } from './TeamSection';
 
 export function HomePage() {
@@ -26,6 +27,9 @@ export function HomePage() {
 
       {/* Scaling with Containers — Docker & Orchestration */}
       <ContainerSection />
+
+      {/* Real-Time Connections — WebSockets vs Polling */}
+      <WebSocketSection />
 
       {/* About / Team */}
       <TeamSection />
