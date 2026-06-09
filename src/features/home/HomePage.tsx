@@ -3,6 +3,7 @@ import { ArchitectureSection } from './ArchitectureSection';
 import { FeatureShowcase } from './FeatureShowcase';
 import { DataFlowSection } from './DataFlowSection';
 import { EncryptionSection } from './EncryptionSection';
+import { ContainerSection } from './ContainerSection';
 import { TeamSection } from './TeamSection';
 
 export function HomePage() {
@@ -22,6 +23,9 @@ export function HomePage() {
 
       {/* The Request Journey — TLS Encryption */}
       <EncryptionSection />
+
+      {/* Scaling with Containers — Docker & Orchestration */}
+      <ContainerSection />
 
       {/* About / Team */}
       <TeamSection />
