@@ -21,42 +21,42 @@ const PHASES: HandshakePhase[] = [
   {
     id: 'client-hello',
     label: 'Client Hello',
-    description: 'Browser sends supported cipher suites and a random number to the server.',
+    description: 'Браузърът изпраща поддържаните методи за шифриране и случаен номер към сървъра.',
     from: 'client',
     to: 'server',
     color: 'oklch(0.70 0.18 30)',
     icon: Hand,
-    technicalDetail: 'Supported ciphers, TLS version, and client random nonce',
+    technicalDetail: 'Поддържани шифри, версия TLS и случаен номер (client nonce)',
   },
   {
     id: 'cert',
-    label: 'Server Certificate',
-    description: 'Server responds with its SSL certificate signed by a trusted CA — browser verifies the chain.',
+    label: 'Сертификат на сървъра',
+    description: 'Сървърът отговаря с SSL сертификат, подписан от доверен орган (CA) — браузърът го проверява.',
     from: 'server',
     to: 'client',
     color: 'oklch(0.70 0.14 80)',
     icon: FileKey,
-    technicalDetail: 'X.509 certificate chain with public key',
+    technicalDetail: 'X.509 верига сертификати с публичен ключ',
   },
   {
     id: 'key-exchange',
-    label: 'Key Exchange',
-    description: 'Both sides compute a shared secret using ECDHE — even if intercepted, the secret cannot be derived.',
+    label: 'Обмен на ключове',
+    description: 'Двете страни изчисляват обща тайна чрез ECDHE — дори ако връзката е прехваната, тайната не може да бъде извлечена.',
     from: 'client',
     to: 'server',
     color: 'oklch(0.75 0.18 70)',
     icon: FileKey,
-    technicalDetail: 'Elliptic Curve Diffie-Hellman key derivation',
+    technicalDetail: 'Извеждане на ключ чрез Elliptic Curve Diffie-Hellman (ECDHE)',
   },
   {
     id: 'encrypted',
-    label: 'Encrypted Tunnel',
-    description: 'All data now uses AES-256-GCM symmetric encryption with the shared secret — fast and secure.',
+    label: 'Шифриран тунел',
+    description: 'Всички данни сега се изпращат чрез AES-256-GCM шифриране с общата тайна — бързо и сигурно.',
     from: 'server',
     to: 'client',
     color: 'oklch(0.75 0.20 160)',
     icon: Lock,
-    technicalDetail: 'AES-256-GCM symmetric encryption active',
+    technicalDetail: 'AES-256-GCM симетрично шифриране е активно',
   },
 ];
 
@@ -222,10 +222,10 @@ export function EncryptionSection() {
         animate={headerAnimate}
         transition={{ duration: 0.5 }}
       >
-        <h2 className="mb-3">The Request Journey</h2>
+        <h2 className="mb-3">Пътят на заявката</h2>
         <p className="mx-auto max-w-lg text-muted-foreground">
-          Every question you post travels encrypted — here&rsquo;s how the
-          TLS handshake protects your data across the public internet.
+          Всеки въпрос, който изпращаш, пътува шифриран — така TLS ръковащат щити данните ти
+          във публичната мрежа.
         </p>
       </motion.div>
 
@@ -435,7 +435,7 @@ export function EncryptionSection() {
             >
               <Play className="size-4 text-accent shrink-0" />
               <p className="text-sm text-muted-foreground">
-                Click a step below to start the TLS handshake animation.
+                Кликни някой от етапите, за да стартираш анимацията на TLS ръковащата.
               </p>
             </motion.div>
           )}
@@ -497,7 +497,7 @@ export function EncryptionSection() {
                     <span className={`text-xs font-mono transition-colors duration-300 ${
                       isActive ? 'text-muted-foreground' : 'text-muted-foreground/40'
                     }`}>
-                      {phase.from === 'client' ? 'Browser → Server' : 'Server → Browser'}
+                      {phase.from === 'client' ? 'Браузър → Сървър' : 'Сървър → Браузър'}
                     </span>
                   </div>
                   <p className={`text-sm leading-relaxed mt-1 transition-colors duration-300 ${
@@ -526,10 +526,9 @@ export function EncryptionSection() {
           >
             <Lock className="size-4 text-accent shrink-0" />
             <p className="text-xs text-muted-foreground leading-relaxed">
-              <span className="font-semibold text-foreground">End result:</span>{' '}
-              All data is encrypted with AES-256-GCM. A man-in-the-middle attacker
-              who intercepts the handshake sees only ciphertext — without the shared
-              secret, decryption is computationally infeasible.
+              <span className="font-semibold text-foreground">Краен резултат:</span>{' '}
+              Всички данни се шифрират с AES-256-GCM. Нападател, който прехване връзката,
+              вижда само нечетлив текст — без общата тайна, дешифрирането е практически невъзможно.
             </p>
           </motion.div>
         </div>

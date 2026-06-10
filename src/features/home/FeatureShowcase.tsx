@@ -165,44 +165,44 @@ function CommunityModSvg({ className }: { className?: string }) {
 /* ---------- Feature definitions ---------- */
 const FEATURES: Feature[] = [
   {
-    title: 'Thread Creation',
+    title: 'Създаване на тема',
     description:
-      'Post questions with rich text, attach categories and tags. Structured input ensures clear, answerable questions that attract quality responses.',
+      'Публикувай въпрос с форматиран текст, категории и тагове. Прецизният въпрос привлича ясни и полезни отговори.',
     span: '',
     illustration: ThreadCreationSvg,
   },
   {
-    title: 'Smart Search',
+    title: 'Умно търсене',
     description:
-      'Full-text search across titles and bodies. Filter by category, keyword, or date to find exactly what you need.',
+      'Търсене по цял текст в заглавия и съдържанието. Филтрирай по категория, ключова дума или дата, за да намериш точно каквото търсиш.',
     span: '',
     illustration: SmartSearchSvg,
   },
   {
-    title: 'Nested Replies',
+    title: 'Вложени отговори',
     description:
-      'Threaded discussions with unlimited nesting. Reply to any comment and follow conversation branches naturally.',
+      'Обсъжданията се разклонява на клонове, като всеки може да отговаря директно на друг коментар.',
     span: '',
     illustration: NestedRepliesSvg,
   },
   {
-    title: 'Real-time Updates',
+    title: 'Актуализации в реално време',
     description:
-      'Live thread activity indicators. See new replies and trending discussions as they happen.',
+      'Маркери за нова активност в обсъжданията. Виж нови отговори и популярни дискусии в момента, в който се появяват.',
     span: '',
     illustration: RealtimeUpdatesSvg,
   },
   {
-    title: 'User Reputation',
+    title: 'Репутация на потребителя',
     description:
-      'Gamified credibility system. Earn reputation through helpful answers and quality contributions to the community.',
+      'Геймифицирана система за доверие. Печели точки репутация чрез полезни отговори и качествени приноси към общността.',
     span: '',
     illustration: UserReputationSvg,
   },
   {
-    title: 'Community Moderation',
+    title: 'Модерация от общността',
     description:
-      'Peer-driven content moderation. Upvote quality answers, flag inappropriate content, and keep the community healthy.',
+      'Контролът върху съдържанието е в ръцете на потребителите. Поддържай добри отговори, сигнализирай неподходящо съдържание и пази за хеалта на общността.',
     span: '',
     illustration: CommunityModSvg,
   },
@@ -269,10 +269,10 @@ export function FeatureShowcase() {
     >
       {/* Editorial section header */}
       <div className="mb-12 text-center">
-        <h2 className="mb-3">What Makes RedRep Different</h2>
+        <h2 className="mb-3">Какво прави RedRep различен?</h2>
         <p className="mx-auto max-w-lg text-muted-foreground">
-          Purpose-built for academic communities — every feature designed
-          to turn questions into knowledge.
+          Създаден специално за академични общности — всяка функция е
+          дизайнирана така, че да превръща въпросите в знания.
         </p>
       </div>
 

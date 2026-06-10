@@ -29,7 +29,7 @@ const NODES: ArchNode[] = [
     title: 'Frontend',
     tech: 'React SPA',
     description:
-      'Single-page application with React 19, TypeScript, and Tailwind CSS v4. All rendering, routing, and interactions are client-side.',
+      'Едностранично приложение (SPA) изградено с React 19, TypeScript и Tailwind CSS. Цялата визуализация и навигацията се обработват директно от браузъра.',
     left: '50%',
     top: '12%',
   },
@@ -39,7 +39,7 @@ const NODES: ArchNode[] = [
     title: 'API Layer',
     tech: 'REST / GraphQL',
     description:
-      'Centralized gateway for client-server communication. RESTful endpoints with optional GraphQL for flexible queries.',
+      'Централизиран проход за връзката между потребителя и сървъра. Поддържа стандартни REST крайни точки и GraphQL заявки.',
     left: '25%',
     top: '46%',
   },
@@ -49,27 +49,27 @@ const NODES: ArchNode[] = [
     title: 'Auth Service',
     tech: 'JWT + OAuth',
     description:
-      'Authentication, session management, and role-based access control using JWT tokens with OAuth providers.',
+      'Управлява влизането, сесиите и правата за достъп чрез JWT токъни и OAuth доставчици.',
     left: '75%',
     top: '46%',
   },
   {
     id: 'database',
     icon: Database,
-    title: 'Database',
+    title: 'База данни',
     tech: 'PostgreSQL',
     description:
-      'Relational store for threads, replies, users, and categories. Indexed for fast full-text search and nested queries.',
+      'Релационна база за съхранение на теми, отговори, потребители и категории. Оптимизирана за бързо търсене по цял текст и влезти заявки.',
     left: '35%',
     top: '82%',
   },
   {
     id: 'search',
     icon: Search,
-    title: 'Search Service',
+    title: 'Търсачка',
     tech: 'Full-Text Index',
     description:
-      'Dedicated full-text search over titles and bodies with filtering by category, tags, and date range.',
+      'Дедикирана услуга за търсене по цял текст в заглавия и съдържанието, с филтриране по категория, тагове и дата.',
     left: '65%',
     top: '82%',
   },
@@ -112,10 +112,10 @@ export function ArchitectureSection() {
     <section ref={sectionRef} className="section-spacing mx-auto max-w-5xl px-6">
       {/* Header */}
       <div className="mb-10 text-center">
-        <h2 className="mb-3">How It&rsquo;s Built</h2>
+        <h2 className="mb-3">Как е изградена?</h2>
         <p className="mx-auto max-w-lg text-muted-foreground">
-          Five layers working together — from pixel to persistence.
-          Hover any layer to trace its connections.
+          Пет нива работят заедно — от екрана до съхранилището.
+          Задржи мишката върху някой елемент, за да видиш връзките му.
         </p>
       </div>
 
@@ -279,7 +279,7 @@ export function ArchitectureSection() {
           animate={{ opacity: 1 }}
           transition={{ delay: 1.4 }}
         >
-          Hover any layer to highlight its connections
+        Задржи мишката върху някой елемент, за да покажеш връзките му
         </motion.p>
       )}
     </section>

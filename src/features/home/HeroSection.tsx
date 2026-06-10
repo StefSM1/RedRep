@@ -75,13 +75,13 @@ export function HeroSection() {
                     document.getElementById('features')?.scrollIntoView({ behavior: 'smooth' });
                   }}
                 >
-                  Explore Features
+                  Разгледай функциите
                 </Button>
                 <Button
                   className="cursor-pointer"
                   onClick={() => navigate('/preview')}
                 >
-                  Try Preview &rarr;
+                  Пробвай прототипа &rarr;
                 </Button>
               </div>
             </motion.div>

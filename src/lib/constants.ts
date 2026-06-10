@@ -66,19 +66,19 @@ export type Category = (typeof CATEGORIES)[number];
 
 // --- Category Display Config ---
 export const CATEGORY_CONFIG: Record<Category, { label: string; color: string }> = {
-  general: { label: 'General', color: 'oklch(0.55 0.20 270)' },
-  homework: { label: 'Homework', color: 'oklch(0.75 0.18 70)' },
-  'exam-prep': { label: 'Exam Prep', color: 'oklch(0.55 0.22 25)' },
-  project: { label: 'Project', color: 'oklch(0.65 0.15 160)' },
-  career: { label: 'Career', color: 'oklch(0.60 0.18 330)' },
-  'campus-life': { label: 'Campus Life', color: 'oklch(0.70 0.12 40)' },
+  general: { label: 'Общо', color: 'oklch(0.55 0.20 270)' },
+  homework: { label: 'Домашни', color: 'oklch(0.75 0.18 70)' },
+  'exam-prep': { label: 'Подготовка за изпит', color: 'oklch(0.55 0.22 25)' },
+  project: { label: 'Проект', color: 'oklch(0.65 0.15 160)' },
+  career: { label: 'Кариера', color: 'oklch(0.60 0.18 330)' },
+  'campus-life': { label: 'Студентски живот', color: 'oklch(0.70 0.12 40)' },
 } as const;
 
 // --- App Config ---
 export const APP_CONFIG = {
   name: 'RedRep',
-  tagline: 'Your questions, answered by peers.',
-  description: 'A Reddit-style student Q&A platform for academic help-seeking.',
+  tagline: 'Твоите въпроси, отговорени от съученици.',
+  description: 'Академична платформа за въпроси и отговори, където студентите си помагат взаимно.',
   maxThreads: 100,
   searchDebounce: 300,
   storageKey: 'redrep-threads',
@@ -87,17 +87,17 @@ export const APP_CONFIG = {
 
 // --- Thread Sort Options ---
 export const THREAD_SORTS: { value: ThreadSort; label: string; icon: string }[] = [
-  { value: 'hot', label: 'Hot', icon: 'Flame' },
-  { value: 'new', label: 'New', icon: 'Clock' },
-  { value: 'top', label: 'Top', icon: 'TrendingUp' },
+  { value: 'hot', label: 'Популярни', icon: 'Flame' },
+  { value: 'new', label: 'Нови', icon: 'Clock' },
+  { value: 'top', label: 'Топ', icon: 'TrendingUp' },
 ] as const;
 
 // --- Stats Marquee Items ---
 export const STATS_ITEMS = [
-  { label: 'Questions asked', value: '1,247' },
-  { label: 'Answers given', value: '3,892' },
-  { label: 'Best answers', value: '891' },
-  { label: 'Active students', value: '342' },
-  { label: 'Categories', value: '6' },
-  { label: 'Reputation earned', value: '28.4K' },
+  { label: 'Зададени въпроси', value: '1,247' },
+  { label: 'Дадени отговори', value: '3,892' },
+  { label: 'Най-добри отговори', value: '891' },
+  { label: 'Активни студенти', value: '342' },
+  { label: 'Категории', value: '6' },
+  { label: 'Спечелена репутация', value: '28.4K' },
 ] as const;

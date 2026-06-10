@@ -22,38 +22,38 @@ const STEPS: FlowStep[] = [
   {
     icon: PenSquare,
     step: 1,
-    title: 'Create Question',
-    description: 'Post a question with rich text, code snippets, and a clear problem statement.',
+    title: 'Създай въпрос',
+    description: 'Публикувай въпрос с форматиран текст, кодови фрагменти и ясно формулиран проблем.',
   },
   {
     icon: Tags,
     step: 2,
-    title: 'Categorize & Tag',
-    description: 'Assign a category and relevant topics for discoverability.',
+    title: 'Категоризирай и тагвай',
+    description: 'Избери категория и добави тагове за по-лесно откриване от другите.',
   },
   {
     icon: Send,
     step: 3,
-    title: 'Publish to Feed',
-    description: 'The question goes live in the community feed for all students.',
+    title: 'Публикувай в общността',
+    description: 'Въпросът става видим за всички студенти в потока на общността.',
   },
   {
     icon: MessageSquare,
     step: 4,
-    title: 'Receive Replies',
-    description: 'Peers respond with answers, nested replies, and follow-ups.',
+    title: 'Получи отговори',
+    description: 'Колегите отговарят с решения, вложени отговори и допълнителни въпроси.',
   },
   {
     icon: CheckCircle2,
     step: 5,
-    title: 'Select Best Answer',
-    description: 'The author marks the most helpful reply as accepted.',
+    title: 'Избери най-добрия отговор',
+    description: 'Авторът обелязва най-полезния отговор като приет.',
   },
   {
     icon: Archive,
     step: 6,
-    title: 'Archive & Search',
-    description: 'Resolved threads become searchable knowledge for future students.',
+    title: 'Архивирай и търси',
+    description: 'Решените теми стават търсими знания за бъдещите студенти.',
   },
 ];
 
@@ -76,10 +76,10 @@ export function DataFlowSection() {
     <section ref={sectionRef} className="section-spacing mx-auto max-w-6xl px-6">
       {/* Header */}
       <div className="mb-10 text-center">
-        <h2 className="mb-3">From Question to Knowledge</h2>
+        <h2 className="mb-3">От въпрос до споделено знание</h2>
         <p className="mx-auto max-w-lg text-muted-foreground">
-          Every question follows a clear path — from creation to
-          archived knowledge that helps the next student.
+          Всеки въпрос следва ясен път — от създаването до
+          архивирането, като знание, помагащо на следващия студент.
         </p>
       </div>
 
@@ -136,7 +136,7 @@ export function DataFlowSection() {
                   <Icon className="size-8" />
                 </div>
                 <span className="mt-4 text-sm font-mono text-accent font-medium uppercase tracking-widest">
-                  Step {step.step}
+                  Етап {step.step}
                 </span>
                 <h4 className="text-base font-semibold font-[family-name:var(--font-display)] text-foreground mt-1.5 leading-tight">
                   {step.title}
@@ -182,7 +182,7 @@ export function DataFlowSection() {
                 {/* Content card */}
                 <div className="liquid-glass rounded-xl p-4">
                   <span className="text-xs font-mono text-accent font-medium uppercase tracking-widest">
-                    Step {step.step}
+                    Етап {step.step}
                   </span>
                   <h4 className="text-base font-semibold font-[family-name:var(--font-display)] text-foreground mt-1 mb-1.5">
                     {step.title}

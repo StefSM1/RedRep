@@ -18,83 +18,83 @@ interface IncidentPhase {
 const PHASES: IncidentPhase[] = [
   {
     id: 'normal',
-    title: 'Normal',
+    title: 'Нормален',
     description:
-      'All metrics green. Steady traffic, low error rate, fast responses. The system is healthy and serving requests efficiently.',
+      'Всички показатели са зелени. Стабилен трафик, нисък брой грешки, бързи отговори. Системата е здрава и обслужва заявките ефективно.',
     icon: HeartPulse,
     substeps: [
-      'Request rate: ~100 req/s',
-      'Error rate: 0.1% (healthy)',
-      'p99 latency: 50ms',
-      '3 healthy pods running',
+      'Темпо на заявки: ~100 заявки/с',
+      'Грешки: 0.1% (нормално)',
+      'p99 закъснение: 50ms',
+      '3 здрави пода работят',
     ],
     metrics: { reqPerSec: 100, errorRate: 0.1, p99Latency: 50 },
     color: 'oklch(0.75 0.20 160)',
-    logLine: '[12:00:01] INFO  Request rate: 102 req/s — nominal',
+    logLine: '[12:00:01] INFO  Темпо: 102 заявки/с — нормално',
   },
   {
     id: 'spike',
-    title: 'Spike Detected',
+    title: 'Открит спик',
     description:
-      'Traffic surges unexpectedly — 5× normal load in seconds. Latency starts climbing as pods approach capacity.',
+      'Трафикът нараства неочаквано — 5× нормалното натоварване за секунди. Закъснението започва да расте, докато подовете достигат им капацитета.',
     icon: Activity,
     substeps: [
-      'Request rate spikes to 500 req/s',
-      'CPU utilization > 85%',
-      'p99 latency climbing: 200ms',
-      'Error rate ticking up: 0.8%',
+      'Темпо на заявки скоква до 500 заявки/с',
+      'Използване на CPU > 85%',
+      'p99 закъснение расте: 200ms',
+      'Грешките нарастват: 0.8%',
     ],
     metrics: { reqPerSec: 500, errorRate: 0.8, p99Latency: 200 },
     color: 'oklch(0.75 0.18 70)',
-    logLine: '[12:00:03] WARN  Request rate: 487 req/s — threshold exceeded',
+    logLine: '[12:00:03] WARN  Темпо: 487 заявки/с — над прага',
   },
   {
     id: 'alert',
-    title: 'Alert Fired',
+    title: 'Предупреждение изстреляно',
     description:
-      'p99 latency breaches the 500ms SLO. An alert fires to the on-call engineer via PagerDuty within seconds.',
+      'p99 закъснението надхвърля SLO границата от 500ms. Предупреждението достига дежурния инженер чрез PagerDuty за секунди.',
     icon: Bell,
     substeps: [
-      'p99 latency: 812ms > 500ms SLO',
-      'Error rate: 2.5% — degraded',
-      'Alert → PagerDuty → Slack',
-      'On-call engineer notified in 8s',
+      'p99 закъснение: 812ms > 500ms SLO',
+      'Грешки: 2.5% — деградирано',
+      'Предупреждение → PagerDuty → Slack',
+      'Дежурният инженер е уведомен за 8с',
     ],
     metrics: { reqPerSec: 480, errorRate: 2.5, p99Latency: 812 },
     color: 'oklch(0.65 0.22 25)',
-    logLine: '[12:00:04] ALERT p99 latency: 812ms > 500ms limit',
+    logLine: '[12:00:04] ALERT p99 закъснение: 812ms > 500ms лимит',
   },
   {
     id: 'scale',
-    title: 'Auto-Scale',
+    title: 'Автоматично мащабиране',
     description:
-      'Kubernetes HPA detects high CPU and spawns 2 new pods. The load balancer starts distributing traffic across all replicas.',
+      'Kubernetes HPA усеща високо CPU и стартира 2 нови пода. Load balancer започва да разпределя трафика между всички копия.',
     icon: Scale,
     substeps: [
-      'HPA: CPU > 80% for 30s',
-      'Spawning 2 new pods (3 → 5)',
-      'Pods ready in ~12s',
-      'Load distributed across 5 replicas',
+      'HPA: CPU > 80% за 30с',
+      'Стартиране на 2 нови пода (3 → 5)',
+      'Подовете готови за ~12с',
+      'Натоварването разпределено между 5 копия',
     ],
     metrics: { reqPerSec: 350, errorRate: 1.2, p99Latency: 400 },
     color: 'oklch(0.68 0.16 230)',
-    logLine: '[12:00:05] INFO  Auto-scaler: spawning 2 new containers',
+    logLine: '[12:00:05] INFO  Автомащабиране: стартирам 2 нови контейнера',
   },
   {
     id: 'recovery',
-    title: 'Recovery',
+    title: 'Възстановяване',
     description:
-      'Traffic normalizes, new pods absorb the load. All metrics return to green — the system self-healed without human intervention.',
+      'Трафикът се нормализира, новите подове поемат натоварването. Всички показатели се връщат в зелено — системата се възстанови само, без човешка намеса.',
     icon: Shield,
     substeps: [
-      'Request rate: 156 req/s — normalized',
-      'Error rate back to 0.1%',
-      'p99 latency: 60ms (within SLO)',
-      'Zero downtime — users unaffected',
+      'Темпо: 156 заявки/с — нормализирано',
+      'Грешките се върнаха до 0.1%',
+      'p99 закъснение: 60ms (в SLO)',
+      'Нулев престой — потребителите не усещат',
     ],
     metrics: { reqPerSec: 156, errorRate: 0.1, p99Latency: 60 },
     color: 'oklch(0.75 0.20 160)',
-    logLine: '[12:00:08] INFO  Request rate: 156 req/s — normalized',
+    logLine: '[12:00:08] INFO  Темпо: 156 заявки/с — нормализирано',
   },
 ];
 
@@ -208,12 +208,12 @@ export function MonitoringSection() {
   const BAR_MAX_H = 55;
   const BAR_BASE_Y = 92; //48
   const barX = (i: number) => 20 + i * 28;
-  
+
   /* ─── Gauge data (error rate) ─── */
   const GAUGE_CX = 240;
   const GAUGE_CY = 88;
   const GAUGE_R = 34;
-  
+
   /* ─── Line chart data (p99 latency) ─── */
   const LINE_BASE_Y = 96;
   const LINE_MAX_H = 60;
@@ -228,10 +228,10 @@ export function MonitoringSection() {
         animate={headerAnim}
         transition={{ duration: 0.5 }}
       >
-        <h2 className="mb-3">Monitoring &amp; Observability</h2>
+        <h2 className="mb-3">Мониторинг и наблюдаемост</h2>
         <p className="mx-auto max-w-xl text-muted-foreground">
-          Knowing something&rsquo;s wrong before your users do — how RedRep
-          detects incidents and self-heals in seconds.
+          Да знаеш за проблема преди потребителите ти — как RedRep
+          открива инцидентите и се възстановява сам за секунди.
         </p>
       </motion.div>
 
@@ -245,7 +245,7 @@ export function MonitoringSection() {
         >
           <Play className="size-4 text-accent shrink-0" />
           <p className="text-sm text-muted-foreground">
-            Click a phase below to watch an incident unfold in real time.
+            Кликни фаза от долу, за да видиш как се развива инцидент в реално време.
           </p>
         </motion.div>
       )}
@@ -579,45 +579,39 @@ export function MonitoringSection() {
               role="button"
               tabIndex={0}
               onKeyDown={e => { if (e.key === 'Enter' || e.key === ' ') handleClick(i); }}
-              className={`flex flex-col items-start gap-1.5 p-2.5 rounded-xl cursor-pointer transition-all duration-300 ${
-                isActive && isAnimating
-                  ? 'liquid-glass ring-1 ring-accent/40'
-                  : isActive
-                    ? 'liquid-glass ring-1 ring-accent/25'
-                    : isDone
-                      ? 'bg-accent/[0.04]'
-                      : 'hover:bg-accent/[0.03]'
-              }`}
+              className={`flex flex-col items-start gap-1.5 p-2.5 rounded-xl cursor-pointer transition-all duration-300 ${isActive && isAnimating
+                ? 'liquid-glass ring-1 ring-accent/40'
+                : isActive
+                  ? 'liquid-glass ring-1 ring-accent/25'
+                  : isDone
+                    ? 'bg-accent/[0.04]'
+                    : 'hover:bg-accent/[0.03]'
+                }`}
             >
               <div className="flex items-center gap-1.5 w-full">
-                <span className={`text-[10px] font-mono font-medium transition-colors duration-300 ${
-                  isActive ? 'text-accent' : isDone ? 'text-accent/50' : 'text-muted-foreground/50'
-                }`}>
+                <span className={`text-[10px] font-mono font-medium transition-colors duration-300 ${isActive ? 'text-accent' : isDone ? 'text-accent/50' : 'text-muted-foreground/50'
+                  }`}>
                   {String(i + 1).padStart(2, '0')}
                 </span>
-                <div className={`flex size-7 items-center justify-center rounded-lg transition-colors duration-300 ${
-                  isActive
-                    ? 'bg-accent/15 text-accent'
-                    : isDone
-                      ? 'bg-accent/8 text-accent/60'
-                      : 'bg-muted text-muted-foreground'
-                }`}>
+                <div className={`flex size-7 items-center justify-center rounded-lg transition-colors duration-300 ${isActive
+                  ? 'bg-accent/15 text-accent'
+                  : isDone
+                    ? 'bg-accent/8 text-accent/60'
+                    : 'bg-muted text-muted-foreground'
+                  }`}>
                   <Icon className="size-3.5" />
                 </div>
-                <h4 className={`text-xs font-semibold font-[family-name:var(--font-display)] transition-colors duration-300 ${
-                  isActive ? 'text-foreground' : isDone ? 'text-foreground/70' : 'text-foreground/50'
-                }`}>
+                <h4 className={`text-xs font-semibold font-[family-name:var(--font-display)] transition-colors duration-300 ${isActive ? 'text-foreground' : isDone ? 'text-foreground/70' : 'text-foreground/50'
+                  }`}>
                   {phase.title}
                 </h4>
               </div>
-              <p className={`text-[11px] leading-relaxed transition-colors duration-300 ${
-                isActive || isDone ? 'text-muted-foreground' : 'text-muted-foreground/40'
-              }`}>
+              <p className={`text-[11px] leading-relaxed transition-colors duration-300 ${isActive || isDone ? 'text-muted-foreground' : 'text-muted-foreground/40'
+                }`}>
                 {phase.description}
               </p>
-              <ul className={`space-y-0.5 transition-all duration-300 ${
-                isActive || isDone ? 'opacity-100 max-h-40' : 'opacity-0 max-h-0 overflow-hidden'
-              }`}>
+              <ul className={`space-y-0.5 transition-all duration-300 ${isActive || isDone ? 'opacity-100 max-h-40' : 'opacity-0 max-h-0 overflow-hidden'
+                }`}>
                 {phase.substeps.map(s => (
                   <li key={s} className="text-[10px] font-mono text-muted-foreground/80 flex items-start gap-1.5">
                     <span className="text-accent/70 mt-0.5">›</span>
@@ -626,7 +620,7 @@ export function MonitoringSection() {
                 ))}
               </ul>
               {isActive && !isAnimating && (
-                <p className="text-[10px] font-mono text-accent/60 mt-0.5">click to replay</p>
+                <p className="text-[10px] font-mono text-accent/60 mt-0.5">кликни за повторно</p>
               )}
             </motion.div>
           );
@@ -642,11 +636,10 @@ export function MonitoringSection() {
       >
         <Activity className="size-4 text-accent shrink-0" />
         <p className="text-xs text-muted-foreground leading-relaxed">
-          <span className="font-semibold text-foreground">End result:</span>{' '}
-          Prometheus scrapes metrics every 15s, alerts fire within seconds of
-          SLO breaches, and Kubernetes auto-scales before users notice — the
-          three pillars of observability (metrics, logs, traces) keep RedRep
-          running smoothly.
+          <span className="font-semibold text-foreground">Краен резултат:</span>{' '}
+          Prometheus събира показатели всеки 15s, предупрежденията се задействат за секунди след спукане на SLO,
+          а Kubernetes автоматично мащабира преди потребителите да усетят — трите стълба на наблюдаемостта
+          (показатели, логове, трасиране) пазят RedRep да работи без престой.
         </p>
       </motion.div>
     </section>

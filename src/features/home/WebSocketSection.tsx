@@ -17,52 +17,52 @@ const PHASES: ComparisonPhase[] = [
     id: 'polling',
     title: 'HTTP Polling',
     description:
-      'The client repeatedly asks "anything new?" every few seconds. Most responses are empty — wasting bandwidth and adding latency.',
+      'Клиентът постоянно пита: „Има ли нещо ново?“ всеки няколко секунди. Повечето отговори са празни — хабьосва трафик и добавя закъснения.',
     icon: RefreshCw,
     substeps: [
-      'GET /notifications every 3s',
-      'Server: "no new data" (×5)',
-      'Server: "new reply!" — 15s late',
-      '~30 req/min, 2-5s avg delay',
+      'GET /notifications всеки 3s.',
+      'Сървър: „няма нови данни“ (×5)',
+      'Сървър: „нов отговор!“ — 15s по-късно',
+      '~30 заявки/мин, 2–5s средно закъснение',
     ],
   },
   {
     id: 'upgrade',
-    title: 'WebSocket Upgrade',
+    title: 'Преминаване към WebSocket',
     description:
-      'A single HTTP request with an Upgrade header switches the connection to a persistent, bidirectional WebSocket channel.',
+      'Една HTTP заявка с Upgrade заглавка превключва връзката към постоянен, двупосочен WebSocket канал.',
     icon: ArrowRight,
     substeps: [
       'GET /ws — Upgrade: websocket',
-      'Server accepts: 101 Switching',
-      'Connection stays open permanently',
-      'Full-duplex: both sides can speak',
+      'Сървърът приема: 101 Switching',
+      'Връзката остава отворена постоянно',
+      'Двупосочен: и двете страни могат да изпращат',
     ],
   },
   {
     id: 'live',
-    title: 'Live Push',
+    title: 'Живо изпращане',
     description:
-      'Server pushes data instantly the moment something happens. No polling, no delays — sub-100ms latency for every event.',
+      'Сървърът изпраща данни мигновеностно. Без запитване, без закъснения — закъснение под 100ms за всяко събитие.',
     icon: Zap,
     substeps: [
-      'User A posts a reply',
-      'Server pushes to all connected clients',
-      'Users B & C see it in < 100ms',
-      'Heartbeat ping/pong keeps alive',
+      'Потребител A публикува отговор',
+      'Сървърът изпраща към всички свързани потребители',
+      'Потребители B и C виждат в < 100ms',
+      'Heartbeat ping/pong пази връзката жива',
     ],
   },
   {
     id: 'reconnect',
-    title: 'Auto-Reconnect',
+    title: 'Автоматично възстановяване',
     description:
-      'Connection drops happen — WiFi flickers, tunnels close. The client retries with exponential backoff to avoid hammering the server.',
+      'Връзката може да се прекъсне — WiFi прекъсва, тунели се затварят. Клиентът опитва повторно с нарастващо закъснение, за да избягне претоварването на сървъра.',
     icon: Wifi,
     substeps: [
-      'Connection lost → detect via ping',
-      'Retry after 1s, then 2s, 4s, 8s',
-      'Max backoff cap at 30s',
-      'Resume seamlessly — user unaware',
+      'Изгубена връзка → откриване чрез ping',
+      'Повтор след 1s, след 2s, 4s 8s',
+      'Максимално закъснение 30s',
+      'Безпроблемно подновяване — потребителят няма още',
     ],
   },
 ];
@@ -180,10 +180,10 @@ export function WebSocketSection() {
         animate={headerAnim}
         transition={{ duration: 0.5 }}
       >
-        <h2 className="mb-3">Real-Time Connections</h2>
+        <h2 className="mb-3">Връзки в реално време</h2>
         <p className="mx-auto max-w-xl text-muted-foreground">
-          Get notified the instant someone answers your question — here&rsquo;s
-          why WebSockets beat polling for live communication.
+          Получавай известие в момента, в който някой отговари на въпроса ти — ето защо
+          WebSockets печелат поллинга за жива комуникация.
         </p>
       </motion.div>
 
@@ -197,7 +197,7 @@ export function WebSocketSection() {
         >
           <Play className="size-4 text-accent shrink-0" />
           <p className="text-sm text-muted-foreground">
-            Click a step below to see how real-time messaging works.
+            Кликни етап от долу, за да видиш как работят съобщенията в реално време.
           </p>
         </motion.div>
       )}
@@ -692,45 +692,39 @@ export function WebSocketSection() {
               role="button"
               tabIndex={0}
               onKeyDown={e => { if (e.key === 'Enter' || e.key === ' ') handleClick(i); }}
-              className={`flex flex-col items-start gap-2 p-3 rounded-xl cursor-pointer transition-all duration-300 ${
-                isActive && isAnimating
-                  ? 'liquid-glass ring-1 ring-accent/40'
-                  : isActive
-                    ? 'liquid-glass ring-1 ring-accent/25'
-                    : isDone
-                      ? 'bg-accent/[0.04]'
-                      : 'hover:bg-accent/[0.03]'
-              }`}
+              className={`flex flex-col items-start gap-2 p-3 rounded-xl cursor-pointer transition-all duration-300 ${isActive && isAnimating
+                ? 'liquid-glass ring-1 ring-accent/40'
+                : isActive
+                  ? 'liquid-glass ring-1 ring-accent/25'
+                  : isDone
+                    ? 'bg-accent/[0.04]'
+                    : 'hover:bg-accent/[0.03]'
+                }`}
             >
               <div className="flex items-center gap-2 w-full">
-                <span className={`text-xs font-mono font-medium transition-colors duration-300 ${
-                  isActive ? 'text-accent' : isDone ? 'text-accent/50' : 'text-muted-foreground/50'
-                }`}>
+                <span className={`text-xs font-mono font-medium transition-colors duration-300 ${isActive ? 'text-accent' : isDone ? 'text-accent/50' : 'text-muted-foreground/50'
+                  }`}>
                   {String(i + 1).padStart(2, '0')}
                 </span>
-                <div className={`flex size-8 items-center justify-center rounded-lg transition-colors duration-300 ${
-                  isActive
-                    ? 'bg-accent/15 text-accent'
-                    : isDone
-                      ? 'bg-accent/8 text-accent/60'
-                      : 'bg-muted text-muted-foreground'
-                }`}>
+                <div className={`flex size-8 items-center justify-center rounded-lg transition-colors duration-300 ${isActive
+                  ? 'bg-accent/15 text-accent'
+                  : isDone
+                    ? 'bg-accent/8 text-accent/60'
+                    : 'bg-muted text-muted-foreground'
+                  }`}>
                   <Icon className="size-4" />
                 </div>
-                <h4 className={`text-sm font-semibold font-[family-name:var(--font-display)] transition-colors duration-300 ${
-                  isActive ? 'text-foreground' : isDone ? 'text-foreground/70' : 'text-foreground/50'
-                }`}>
+                <h4 className={`text-sm font-semibold font-[family-name:var(--font-display)] transition-colors duration-300 ${isActive ? 'text-foreground' : isDone ? 'text-foreground/70' : 'text-foreground/50'
+                  }`}>
                   {phase.title}
                 </h4>
               </div>
-              <p className={`text-xs leading-relaxed transition-colors duration-300 ${
-                isActive || isDone ? 'text-muted-foreground' : 'text-muted-foreground/40'
-              }`}>
+              <p className={`text-xs leading-relaxed transition-colors duration-300 ${isActive || isDone ? 'text-muted-foreground' : 'text-muted-foreground/40'
+                }`}>
                 {phase.description}
               </p>
-              <ul className={`space-y-0.5 transition-all duration-300 ${
-                isActive || isDone ? 'opacity-100 max-h-40' : 'opacity-0 max-h-0 overflow-hidden'
-              }`}>
+              <ul className={`space-y-0.5 transition-all duration-300 ${isActive || isDone ? 'opacity-100 max-h-40' : 'opacity-0 max-h-0 overflow-hidden'
+                }`}>
                 {phase.substeps.map(s => (
                   <li key={s} className="text-[11px] font-mono text-muted-foreground/80 flex items-start gap-1.5">
                     <span className="text-accent/70 mt-0.5">›</span>
@@ -739,7 +733,7 @@ export function WebSocketSection() {
                 ))}
               </ul>
               {isActive && !isAnimating && (
-                <p className="text-[10px] font-mono text-accent/60 mt-0.5">click to replay</p>
+                <p className="text-[10px] font-mono text-accent/60 mt-0.5">кликни за повторно</p>
               )}
             </motion.div>
           );
@@ -755,10 +749,9 @@ export function WebSocketSection() {
       >
         <Radio className="size-4 text-accent shrink-0" />
         <p className="text-xs text-muted-foreground leading-relaxed">
-          <span className="font-semibold text-foreground">End result:</span>{' '}
-          A single persistent connection replaces dozens of wasted requests.
-          Every reply, upvote, and notification arrives in under 100ms — and if
-          the connection drops, the client reconnects automatically.
+          <span className="font-semibold text-foreground">Краен резултат:</span>{' '}
+          Една постоянна връзка заменя десетки ненужни заявки.
+          Всеки отговор, гласуване и известие пристигат в под 100ms — а ако връзката се прекъсне, клиентът се възстановява автоматично.
         </p>
       </motion.div>
     </section>
