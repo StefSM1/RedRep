@@ -205,8 +205,8 @@ export function MonitoringSection() {
 
   /* ─── Bar chart data (req/s) ─── */
   const BAR_W = 16;
-  const BAR_MAX_H = 60;
-  const BAR_BASE_Y = 48;//96
+  const BAR_MAX_H = 55;
+  const BAR_BASE_Y = 92; //48
   const barX = (i: number) => 20 + i * 28;
   
   /* ─── Gauge data (error rate) ─── */
@@ -292,27 +292,30 @@ export function MonitoringSection() {
               <text x="16" y={BAR_BASE_Y - BAR_MAX_H * 0.5 - 1} fontSize="3" fontFamily="var(--font-mono)" fill="oklch(0.50 0.02 260)">300</text>
               <text x="16" y={BAR_BASE_Y - 1} fontSize="3" fontFamily="var(--font-mono)" fill="oklch(0.50 0.02 260)">0</text>
 
-              {/* Bars — one per visible phase */}
+              {/* Bars — grow upward from baseline using transform */}
               {PHASES.map((phase, i) => {
                 const h = (phase.metrics.reqPerSec / MAX_REQ) * BAR_MAX_H;
                 const x = barX(i);
                 const color = phase.color;
                 return (
-                  <motion.g key={phase.id}>
+                  <g key={phase.id}>
                     <motion.rect
-                      x={x} y={BAR_BASE_Y} width={BAR_W} height={0}
+                      x={x} y={BAR_BASE_Y - h} width={BAR_W} height={h}
                       rx="2" fill={color} fillOpacity="0.35" stroke={color} strokeWidth="0.8"
-                      initial={{ height: 0, y: BAR_BASE_Y }}
-                      animate={vis(i) ? { height: h, y: BAR_BASE_Y - h } : { height: 0, y: BAR_BASE_Y }}
+                      initial={{ scaleY: 0 }}
+                      animate={vis(i) ? { scaleY: 1 } : { scaleY: 0 }}
                       transition={{ delay: 0.2, duration: 0.5, ease: 'easeOut' }}
-                      style={{ filter: i === activePhase ? `url(#mg)` : undefined }}
+                      style={{
+                        transformOrigin: `${x + BAR_W / 2}px ${BAR_BASE_Y}px`,
+                        filter: i === activePhase ? `url(#mg)` : undefined,
+                      }}
                     />
-                    {/* Value label — appears after bar finishes growing */}
+                    {/* Value label above bar */}
                     <motion.text x={x + BAR_W / 2} y={BAR_BASE_Y - h - 3} textAnchor="middle"
                       fontSize="3.8" fontFamily="var(--font-mono)" fontWeight="600" fill={color}
                       initial={{ opacity: 0 }} animate={vis(i) ? { opacity: 1 } : {}} transition={{ delay: 0.55 }}
                     >{phase.metrics.reqPerSec}</motion.text>
-                  </motion.g>
+                  </g>
                 );
               })}
 
@@ -322,19 +325,15 @@ export function MonitoringSection() {
                   fontSize="3.5" fontFamily="var(--font-mono)" fill="oklch(0.50 0.02 260)">{label}</text>
               ))}
 
-              {/* Current value readout */}
-              <motion.g
-                initial={{ opacity: 0 }} animate={vis(0) ? { opacity: 1 } : {}} transition={{ delay: 0.4 }}
-              >
+              {/* Current value readout — updates each phase */}
+              <g>
                 <rect x="30" y="106" width="100" height="14" rx="3" fill="oklch(0.12 0.02 260 / 0.8)" stroke={phaseColor} strokeWidth="0.6" />
-                <motion.text x="80" y="115.5" textAnchor="middle" fontSize="5" fontFamily="var(--font-mono)" fontWeight="700"
+                <text x="80" y="115.5" textAnchor="middle" fontSize="5" fontFamily="var(--font-mono)" fontWeight="700"
                   fill={phaseColor}
-                  key={activePhase}
-                  initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.3 }}
                 >
                   {currentPhase ? `${currentPhase.metrics.reqPerSec} req/s` : '100 req/s'}
-                </motion.text>
-              </motion.g>
+                </text>
+              </g>
             </g>
 
             {/* ═══════════════════════════════════════
@@ -369,24 +368,35 @@ export function MonitoringSection() {
                 fill="none" stroke={RED} strokeWidth="5" strokeLinecap="round" opacity="0.3"
               />
 
-              {/* Needle arrow — rotates based on current error rate */}
-              <motion.g
-                style={{ transformOrigin: `${GAUGE_CX}px ${GAUGE_CY}px` }}
-                animate={{ rotate: currentPhase ? -90 + (currentPhase.metrics.errorRate / MAX_ERR) * 180 : -90 }}
-                transition={{ type: 'spring', stiffness: 60, damping: 12 }}
-              >
-                {/* Needle shaft */}
-                <line x1={GAUGE_CX} y1={GAUGE_CY + 4} x2={GAUGE_CX} y2={GAUGE_CY - GAUGE_R + 8}
-                  stroke={phaseColor} strokeWidth="1.2" strokeLinecap="round"
-                  style={{ filter: 'url(#mg)' }}
-                />
-                {/* Arrow tip */}
-                <polygon
-                  points={`${GAUGE_CX - 2.5},${GAUGE_CY - GAUGE_R + 12} ${GAUGE_CX},${GAUGE_CY - GAUGE_R + 4} ${GAUGE_CX + 2.5},${GAUGE_CY - GAUGE_R + 12}`}
-                  fill={phaseColor}
-                  style={{ filter: 'url(#mg)' }}
-                />
-              </motion.g>
+              {/* Needle — rotates within semicircle, arrow tip glides along arc */}
+              {(() => {
+                const errRate = currentPhase ? currentPhase.metrics.errorRate : 0;
+                const rotation = -90 + (errRate / MAX_ERR) * 180;
+                const needleLen = GAUGE_R - 3;
+                return (
+                  <motion.g
+                    style={{ transformOrigin: `${GAUGE_CX}px ${GAUGE_CY}px` }}
+                    animate={{ rotate: rotation }}
+                    transition={{ type: 'spring', stiffness: 80, damping: 15 }}
+                  >
+                    {/* Hidden shaft — just for structure, the visible part is the arrow */}
+                    <line x1={GAUGE_CX} y1={GAUGE_CY} x2={GAUGE_CX} y2={GAUGE_CY - needleLen}
+                      stroke="none"
+                    />
+                    {/* Visible arrow line */}
+                    <line x1={GAUGE_CX} y1={GAUGE_CY + 2} x2={GAUGE_CX} y2={GAUGE_CY - needleLen + 5}
+                      stroke={phaseColor} strokeWidth="1.4" strokeLinecap="round"
+                      style={{ filter: 'url(#mg)' }}
+                    />
+                    {/* Arrowhead triangle at tip */}
+                    <polygon
+                      points={`${GAUGE_CX - 2.5},${GAUGE_CY - needleLen + 9} ${GAUGE_CX},${GAUGE_CY - needleLen + 2} ${GAUGE_CX + 2.5},${GAUGE_CY - needleLen + 9}`}
+                      fill={phaseColor}
+                      style={{ filter: 'url(#mg)' }}
+                    />
+                  </motion.g>
+                );
+              })()}
 
               {/* Gauge labels */}
               <text x={GAUGE_CX - GAUGE_R - 4} y={GAUGE_CY + 5} textAnchor="end" fontSize="3" fontFamily="var(--font-mono)" fill="oklch(0.50 0.02 260)">0%</text>
@@ -407,19 +417,15 @@ export function MonitoringSection() {
                 );
               })}
 
-              {/* Current value readout */}
-              <motion.g
-                initial={{ opacity: 0 }} animate={vis(0) ? { opacity: 1 } : {}} transition={{ delay: 0.4 }}
-              >
+              {/* Current value readout — updates each phase */}
+              <g>
                 <rect x="195" y="106" width="90" height="14" rx="3" fill="oklch(0.12 0.02 260 / 0.8)" stroke={phaseColor} strokeWidth="0.6" />
-                <motion.text x="240" y="115.5" textAnchor="middle" fontSize="5" fontFamily="var(--font-mono)" fontWeight="700"
+                <text x="240" y="115.5" textAnchor="middle" fontSize="5" fontFamily="var(--font-mono)" fontWeight="700"
                   fill={phaseColor}
-                  key={activePhase}
-                  initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.3 }}
                 >
                   {currentPhase ? `${currentPhase.metrics.errorRate}%` : '0.1%'}
-                </motion.text>
-              </motion.g>
+                </text>
+              </g>
             </g>
 
             {/* ═══════════════════════════════════════
@@ -454,20 +460,23 @@ export function MonitoringSection() {
               />
               <text x="472" y={LINE_BASE_Y - (500 / MAX_LAT) * LINE_MAX_H + 2} fontSize="3" fontFamily="var(--font-mono)" fill={RED} opacity="0.7">SLO</text>
 
-              {/* Polyline path through all 5 data points */}
+              {/* Polyline path — draws progressively as phases become visible */}
               {(() => {
-                const points = PHASES.map((p, i) => {
-                  const x = lineX(i);
-                  const y = LINE_BASE_Y - (p.metrics.p99Latency / MAX_LAT) * LINE_MAX_H;
-                  return `${x},${y}`;
-                });
-                const pathD = `M${points.join(' L')}`;
+                // Build path from only visible phases
+                const visiblePoints = PHASES
+                  .map((p, i) => ({ i, x: lineX(i), y: LINE_BASE_Y - (p.metrics.p99Latency / MAX_LAT) * LINE_MAX_H }))
+                  .filter(p => vis(p.i));
+                if (visiblePoints.length < 2) return null;
+                const pathD = `M${visiblePoints.map(p => `${p.x},${p.y}`).join(' L')}`;
                 return (
-                  <motion.path d={pathD} stroke={phaseColor} strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" fill="none"
-                    initial={{ pathLength: 0, opacity: 0 }}
-                    animate={vis(0) ? { pathLength: 1, opacity: 0.8 } : {}}
-                    transition={{ delay: 0.3, duration: 1.5, ease: 'easeInOut' }}
-                    style={{ filter: 'url(#mg)' }}
+                  <motion.path
+                    key={`line-${visiblePoints.length}`}
+                    d={pathD}
+                    stroke={GREEN} strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" fill="none"
+                    initial={{ pathLength: 0 }}
+                    animate={{ pathLength: 1 }}
+                    transition={{ duration: 0.6, ease: 'easeOut' }}
+                    style={{ filter: 'url(#mg-g)' }}
                   />
                 );
               })()}
@@ -499,19 +508,15 @@ export function MonitoringSection() {
                   fontSize="3.5" fontFamily="var(--font-mono)" fill="oklch(0.50 0.02 260)">{label}</text>
               ))}
 
-              {/* Current value readout */}
-              <motion.g
-                initial={{ opacity: 0 }} animate={vis(0) ? { opacity: 1 } : {}} transition={{ delay: 0.4 }}
-              >
+              {/* Current value readout — updates each phase */}
+              <g>
                 <rect x="355" y="106" width="90" height="14" rx="3" fill="oklch(0.12 0.02 260 / 0.8)" stroke={phaseColor} strokeWidth="0.6" />
-                <motion.text x="400" y="115.5" textAnchor="middle" fontSize="5" fontFamily="var(--font-mono)" fontWeight="700"
+                <text x="400" y="115.5" textAnchor="middle" fontSize="5" fontFamily="var(--font-mono)" fontWeight="700"
                   fill={phaseColor}
-                  key={activePhase}
-                  initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.3 }}
                 >
                   {currentPhase ? `${currentPhase.metrics.p99Latency}ms` : '50ms'}
-                </motion.text>
-              </motion.g>
+                </text>
+              </g>
             </g>
 
             {/* ═══════════════════════════════════════
