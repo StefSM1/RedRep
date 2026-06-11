@@ -8,9 +8,9 @@ interface SortTabsProps {
 }
 
 const SORT_OPTIONS: { value: ThreadSort; label: string; icon: React.ElementType }[] = [
-  { value: 'hot', label: 'Hot', icon: Flame },
-  { value: 'new', label: 'New', icon: Clock },
-  { value: 'top', label: 'Top', icon: TrendingUp },
+  { value: 'hot', label: 'Популярни', icon: Flame },
+  { value: 'new', label: 'Нови', icon: Clock },
+  { value: 'top', label: 'Топ', icon: TrendingUp },
 ];
 
 export function SortTabs({ value, onChange }: SortTabsProps) {

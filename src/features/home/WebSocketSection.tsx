@@ -234,7 +234,7 @@ export function WebSocketSection() {
                 initial={{ opacity: 0 }} animate={hasEntered ? { opacity: 1 } : {}} transition={{ delay: 0.2 }}
               >
                 <rect x="16" y="30" width="28" height="22" rx="3" fill={SURFACE} stroke={BORDER} strokeWidth="0.8" />
-                <text x="30" y="44" textAnchor="middle" fontSize="4" fontFamily="var(--font-mono)" fill="oklch(0.70 0.02 260)">Client</text>
+                <text x="30" y="44" textAnchor="middle" fontSize="4" fontFamily="var(--font-mono)" fill="oklch(0.70 0.02 260)">Клиент</text>
               </motion.g>
 
               {/* Server icon */}
@@ -242,7 +242,7 @@ export function WebSocketSection() {
                 initial={{ opacity: 0 }} animate={hasEntered ? { opacity: 1 } : {}} transition={{ delay: 0.25 }}
               >
                 <rect x="84" y="30" width="28" height="22" rx="3" fill={SURFACE} stroke={BORDER} strokeWidth="0.8" />
-                <text x="98" y="44" textAnchor="middle" fontSize="4" fontFamily="var(--font-mono)" fill="oklch(0.70 0.02 260)">Server</text>
+                <text x="98" y="44" textAnchor="middle" fontSize="4" fontFamily="var(--font-mono)" fill="oklch(0.70 0.02 260)">Сървър</text>
               </motion.g>
 
               {/* Poll arrows: 6 request-response cycles */}
@@ -325,7 +325,7 @@ export function WebSocketSection() {
                 initial={{ opacity: 0 }} animate={hasEntered ? { opacity: 1 } : {}} transition={{ delay: 0.25 }}
               >
                 <rect x="138" y="30" width="28" height="22" rx="3" fill={SURFACE} stroke={BORDER} strokeWidth="0.8" />
-                <text x="152" y="44" textAnchor="middle" fontSize="4" fontFamily="var(--font-mono)" fill="oklch(0.70 0.02 260)">Client</text>
+                <text x="152" y="44" textAnchor="middle" fontSize="4" fontFamily="var(--font-mono)" fill="oklch(0.70 0.02 260)">Клиент</text>
               </motion.g>
 
               {/* Server */}
@@ -333,7 +333,7 @@ export function WebSocketSection() {
                 initial={{ opacity: 0 }} animate={hasEntered ? { opacity: 1 } : {}} transition={{ delay: 0.3 }}
               >
                 <rect x="202" y="30" width="28" height="22" rx="3" fill={SURFACE} stroke={BORDER} strokeWidth="0.8" />
-                <text x="216" y="44" textAnchor="middle" fontSize="4" fontFamily="var(--font-mono)" fill="oklch(0.70 0.02 260)">Server</text>
+                <text x="216" y="44" textAnchor="middle" fontSize="4" fontFamily="var(--font-mono)" fill="oklch(0.70 0.02 260)">Сървър</text>
               </motion.g>
 
               {/* Step 1: HTTP Upgrade request */}
@@ -379,7 +379,7 @@ export function WebSocketSection() {
                 <rect x="158" y="88" width="52" height="14" rx="3" fill="oklch(0.22 0.06 160 / 0.4)" stroke={G3} strokeWidth="0.8"
                   style={{ filter: 'url(#wg3)' }}
                 />
-                <text x="184" y="97" textAnchor="middle" fontSize="3.8" fontFamily="var(--font-mono)" fontWeight="600" fill="oklch(0.92 0.01 260)">full-duplex</text>
+                <text x="184" y="97" textAnchor="middle" fontSize="3.8" fontFamily="var(--font-mono)" fontWeight="600" fill="oklch(0.92 0.01 260)">двупосочен</text>
 
                 {/* Animated flow dots */}
                 <motion.circle r="1.5" fill={G3}
@@ -429,7 +429,7 @@ export function WebSocketSection() {
               >
                 <rect x="290" y="34" width="40" height="28" rx="4" fill={SURFACE} stroke={G3} strokeWidth="0.9"
                   style={{ filter: 'url(#wg3)' }} />
-                <text x="310" y="50" textAnchor="middle" fontSize="4.5" fontFamily="var(--font-mono)" fontWeight="600" fill={G3}>Server</text>
+                <text x="310" y="50" textAnchor="middle" fontSize="4.5" fontFamily="var(--font-mono)" fontWeight="600" fill={G3}>Сървър</text>
                 <text x="310" y="57" textAnchor="middle" fontSize="3" fontFamily="var(--font-mono)" fill="oklch(0.60 0.02 260)">hub</text>
               </motion.g>
 
@@ -441,7 +441,7 @@ export function WebSocketSection() {
               >
                 <circle cx="262" cy="86" r="10" fill={SURFACE} stroke={G3} strokeWidth="0.8" />
                 <text x="262" y="89" textAnchor="middle" fontSize="4.5" fontFamily="var(--font-mono)" fontWeight="600" fill={G3}>A</text>
-                <text x="262" y="102" textAnchor="middle" fontSize="3.2" fontFamily="var(--font-mono)" fill={G3}>posts</text>
+                <text x="262" y="102" textAnchor="middle" fontSize="3.2" fontFamily="var(--font-mono)" fill={G3}>пише</text>
               </motion.g>
 
               {/* Arrow from User A → Server */}
@@ -543,10 +543,10 @@ export function WebSocketSection() {
               {/* User labels */}
               <motion.text x="358" y="102" textAnchor="middle" fontSize="3.2" fontFamily="var(--font-mono)" fill={G3}
                 initial={{ opacity: 0 }} animate={vis(2) ? { opacity: 0.8 } : {}} transition={{ delay: 1.5 }}
-              >notified</motion.text>
+              >уведомен</motion.text>
               <motion.text x="340" y="136" textAnchor="middle" fontSize="3.2" fontFamily="var(--font-mono)" fill={G3}
                 initial={{ opacity: 0 }} animate={vis(2) ? { opacity: 0.8 } : {}} transition={{ delay: 1.55 }}
-              >notified</motion.text>
+              >уведомен</motion.text>
 
               {/* Heartbeat line at bottom */}
               <motion.g

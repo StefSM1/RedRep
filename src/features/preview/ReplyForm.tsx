@@ -6,7 +6,6 @@ import { Button } from '@/components/ui/button';
 import { toast } from 'sonner';
 
 /* ---------- Constants ---------- */
-const MIN_LENGTH = 10;
 const MAX_LENGTH = 2000;
 
 /* ---------- Component ---------- */
@@ -19,7 +18,7 @@ export function ReplyForm({ onSubmit }: ReplyFormProps) {
   const [isSubmitting, setIsSubmitting] = useState(false);
 
   const charCount = body.length;
-  const isValid = charCount >= MIN_LENGTH && charCount <= MAX_LENGTH;
+  const isValid = body.trim().length > 0 && charCount <= MAX_LENGTH;
 
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
@@ -33,7 +32,7 @@ export function ReplyForm({ onSubmit }: ReplyFormProps) {
     onSubmit(body.trim());
     setBody('');
     setIsSubmitting(false);
-    toast.success('Reply posted!');
+    toast.success('Отговорът е публикуван!');
   }
 
   return (
@@ -42,17 +41,17 @@ export function ReplyForm({ onSubmit }: ReplyFormProps) {
         htmlFor="reply-body"
         className="block text-sm font-medium text-foreground"
       >
-        Your Reply
+        Твоят отговор
       </label>
 
       <Textarea
         id="reply-body"
-        placeholder="Share your thoughts… (min 10 characters)"
+        placeholder="Напиши отговора си тук…"
         value={body}
         onChange={(e) => setBody(e.target.value)}
         disabled={isSubmitting}
         className="min-h-[120px] resize-y"
-        aria-invalid={!isValid && charCount > 0}
+        aria-invalid={charCount > MAX_LENGTH}
       />
 
       {/* Bottom row: character count + submit */}
@@ -63,17 +62,12 @@ export function ReplyForm({ onSubmit }: ReplyFormProps) {
             color:
               charCount > MAX_LENGTH
                 ? 'oklch(0.55 0.22 25)'
-                : charCount >= MIN_LENGTH
+                : charCount > 0
                   ? 'oklch(0.65 0.15 160)'
                   : undefined,
           }}
         >
           {charCount} / {MAX_LENGTH}
-          {charCount > 0 && charCount < MIN_LENGTH && (
-            <span className="text-destructive ml-1.5">
-              (min {MIN_LENGTH} characters)
-            </span>
-          )}
         </motion.span>
 
         <Button
@@ -82,7 +76,7 @@ export function ReplyForm({ onSubmit }: ReplyFormProps) {
           className="cursor-pointer gap-1.5"
         >
           <Send className="size-4" />
-          {isSubmitting ? 'Posting…' : 'Post Reply'}
+          {isSubmitting ? 'Публикуване…' : 'Публикувай'}
         </Button>
       </div>
     </form>

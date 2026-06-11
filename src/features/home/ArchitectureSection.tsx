@@ -69,7 +69,7 @@ const NODES: ArchNode[] = [
     title: 'Търсачка',
     tech: 'Full-Text Index',
     description:
-      'Дедикирана услуга за търсене по цял текст в заглавия и съдържанието, с филтриране по категория, тагове и дата.',
+      'Услуга за търсене по цял текст в заглавия и съдържанието, с филтриране по категория, тагове и дата.',
     left: '65%',
     top: '82%',
   },
@@ -109,7 +109,7 @@ export function ArchitectureSection() {
   const [activeNode, setActiveNode] = useState<LayerId | null>(null);
 
   return (
-    <section ref={sectionRef} className="section-spacing mx-auto max-w-5xl px-6">
+    <section ref={sectionRef} id="architecture" className="section-spacing mx-auto max-w-5xl px-6">
       {/* Header */}
       <div className="mb-10 text-center">
         <h2 className="mb-3">Как е изградена?</h2>
@@ -189,32 +189,29 @@ export function ArchitectureSection() {
                   }}
                 >
                   <div
-                    className={`flex items-center justify-center rounded-full transition-all duration-300 ${
-                      isActive
+                    className={`flex items-center justify-center rounded-full transition-all duration-300 ${isActive
                         ? 'size-16 bg-accent/20 border-2 border-accent shadow-lg shadow-accent/20'
                         : isConnected
                           ? 'size-14 bg-accent/10 border-2 border-accent/40'
                           : 'size-[52px] bg-accent/8 border-2 border-accent/25 hover:bg-accent/15 hover:size-14'
-                    }`}
+                      }`}
                   >
                     <Icon
-                      className={`transition-all duration-300 ${
-                        isActive
+                      className={`transition-all duration-300 ${isActive
                           ? 'size-7 text-accent'
                           : isConnected
                             ? 'size-6 text-accent'
                             : 'size-6 text-accent/70'
-                      }`}
+                        }`}
                     />
                   </div>
                   <span
-                    className={`mt-2 text-sm font-medium font-[family-name:var(--font-display)] whitespace-nowrap transition-colors duration-300 ${
-                      isActive
+                    className={`mt-2 text-sm font-medium font-[family-name:var(--font-display)] whitespace-nowrap transition-colors duration-300 ${isActive
                         ? 'text-accent font-semibold'
                         : isConnected
                           ? 'text-foreground'
                           : 'text-muted-foreground'
-                    }`}
+                      }`}
                   >
                     {node.title}
                   </span>
@@ -235,20 +232,18 @@ export function ArchitectureSection() {
                 key={node.id}
                 onMouseEnter={() => setActiveNode(node.id)}
                 onMouseLeave={() => setActiveNode(null)}
-                className={`flex items-start gap-3 p-3 rounded-xl cursor-default transition-all duration-300 ${
-                  isActive
+                className={`flex items-start gap-3 p-3 rounded-xl cursor-default transition-all duration-300 ${isActive
                     ? 'liquid-glass ring-1 ring-accent/40'
                     : isConnected
                       ? 'bg-accent/[0.03]'
                       : 'hover:bg-accent/[0.02]'
-                }`}
+                  }`}
               >
                 <div
-                  className={`flex size-10 shrink-0 items-center justify-center rounded-lg transition-colors duration-300 ${
-                    isActive || isConnected
+                  className={`flex size-10 shrink-0 items-center justify-center rounded-lg transition-colors duration-300 ${isActive || isConnected
                       ? 'bg-accent/15 text-accent'
                       : 'bg-muted text-muted-foreground'
-                  }`}
+                    }`}
                 >
                   <Icon className="size-5" />
                 </div>
@@ -279,7 +274,7 @@ export function ArchitectureSection() {
           animate={{ opacity: 1 }}
           transition={{ delay: 1.4 }}
         >
-        Задржи мишката върху някой елемент, за да покажеш връзките му
+          Задржи мишката върху някой елемент, за да покажеш връзките му
         </motion.p>
       )}
     </section>

@@ -31,7 +31,7 @@ export function ThreadSidebar({ activeCategory, onCategoryClick }: ThreadSidebar
         <div className="flex items-center gap-2 mb-3">
           <Flame className="size-4 text-accent" />
           <h3 className="text-sm font-semibold font-[family-name:var(--font-display)] text-foreground">
-            Trending Today
+            Популярни днес
           </h3>
         </div>
 
@@ -70,7 +70,7 @@ export function ThreadSidebar({ activeCategory, onCategoryClick }: ThreadSidebar
       {/* Active Categories */}
       <div className="card-solid rounded-xl p-4">
         <h3 className="text-sm font-semibold font-[family-name:var(--font-display)] text-foreground mb-3">
-          Categories
+          Категории
         </h3>
 
         <div className="flex flex-wrap gap-1.5">

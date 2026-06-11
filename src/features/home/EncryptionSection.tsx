@@ -398,7 +398,7 @@ export function EncryptionSection() {
                 {/* Monitor stand */}
                 <line x1={CLIENT_X} y1={BASELINE_Y + 1.5} x2={CLIENT_X} y2={BASELINE_Y + 3} stroke="oklch(0.75 0.18 270)" strokeWidth="0.5" />
                 <line x1={CLIENT_X - 1.5} y1={BASELINE_Y + 3} x2={CLIENT_X + 1.5} y2={BASELINE_Y + 3} stroke="oklch(0.75 0.18 270)" strokeWidth="0.5" strokeLinecap="round" />
-                <text x={CLIENT_X} y={BASELINE_Y + 11} textAnchor="middle" fontSize="3" fill="oklch(0.75 0.18 270)" fontFamily="var(--font-display)" fontWeight="600">Browser</text>
+                <text x={CLIENT_X} y={BASELINE_Y + 11} textAnchor="middle" fontSize="3" fill="oklch(0.75 0.18 270)" fontFamily="var(--font-display)" fontWeight="600">Браузър</text>
               </motion.g>
 
               {/* ── Server node (SVG server rack icon) ── */}
@@ -417,7 +417,7 @@ export function EncryptionSection() {
                 <circle cx={SERVER_X + 1.5} cy={BASELINE_Y - 2.2} r="0.5" fill="oklch(0.75 0.20 160)" />
                 <circle cx={SERVER_X + 1.5} cy={BASELINE_Y + 0.3} r="0.5" fill="oklch(0.75 0.20 160)" />
                 <circle cx={SERVER_X + 1.5} cy={BASELINE_Y + 2.7} r="0.5" fill="oklch(0.75 0.20 160)" />
-                <text x={SERVER_X} y={BASELINE_Y + 11} textAnchor="middle" fontSize="3" fill="oklch(0.75 0.18 270)" fontFamily="var(--font-display)" fontWeight="600">Server</text>
+                <text x={SERVER_X} y={BASELINE_Y + 11} textAnchor="middle" fontSize="3" fill="oklch(0.75 0.18 270)" fontFamily="var(--font-display)" fontWeight="600">Сървър</text>
               </motion.g>
             </svg>
           </div>

@@ -12,11 +12,11 @@ import type { Thread, Reply, User, Vote, VoteDirection, AppState } from '@/types
 const STORAGE_KEY = 'redrep-threads';
 
 const MOCK_USERS: User[] = [
-  { id: 'u1', displayName: 'Alice Chen' },
-  { id: 'u2', displayName: 'Marcus Rivera' },
-  { id: 'u3', displayName: 'Priya Patel' },
-  { id: 'u4', displayName: 'Jake Thompson' },
-  { id: 'u5', displayName: 'Sofia Kim' },
+  { id: 'u1', displayName: 'Алиса Чен' },
+  { id: 'u2', displayName: 'Маркус Ривера' },
+  { id: 'u3', displayName: 'Прия Пател' },
+  { id: 'u4', displayName: 'Джейк Томпсън' },
+  { id: 'u5', displayName: 'София Ким' },
 ];
 
 /* ---------- Helpers ---------- */
@@ -32,7 +32,7 @@ function createSeedThreads(): Thread[] {
   const reply1a: Reply = {
     id: crypto.randomUUID(),
     threadId: '',
-    body: 'I usually make a one-page cheat sheet (even if I cannot use it). The act of condensing everything forces you to understand the connections between topics.',
+    body: 'Обикновено си правя шпаргалка на един лист (дори и да не мога да я ползвам). Самото подреждане на всичко на едно място ти помага да разбереш връзките между темите.',
     author: MOCK_USERS[2],
     createdAt: daysAgo(2),
     score: 12,
@@ -41,7 +41,7 @@ function createSeedThreads(): Thread[] {
   const reply1b: Reply = {
     id: crypto.randomUUID(),
     threadId: '',
-    body: 'For conceptual exams, try explaining each theorem to a study partner out loud. If you cannot explain it simply, you do not understand it well enough.',
+    body: 'За изпити с теория, опитай да обясниш всяка теорема на приятел на глас. Ако не можеш да го обясниш просто, значи не го разбираш достатъчно добре.',
     author: MOCK_USERS[4],
     createdAt: daysAgo(1),
     score: 8,
@@ -51,7 +51,7 @@ function createSeedThreads(): Thread[] {
   const reply2a: Reply = {
     id: crypto.randomUUID(),
     threadId: '',
-    body: 'The official React docs (react.dev) are actually excellent now. They teach hooks-first and have interactive examples you can edit in the browser.',
+    body: 'Официалната документация на React (react.dev) вече е много добра. Учи чрез hooks от самото начало и има интерактивни примери, които можеш да редактираш в браузъра.',
     author: MOCK_USERS[3],
     createdAt: daysAgo(4),
     score: 15,
@@ -61,7 +61,7 @@ function createSeedThreads(): Thread[] {
   const reply3a: Reply = {
     id: crypto.randomUUID(),
     threadId: '',
-    body: 'Startups usually care more about practical skills — they might ask you to build something or debug existing code. FAANG is almost purely algorithmic. Prepare both: LeetCode for FAANG, side projects for startups.',
+    body: 'Стартъпите обикновено ценят повече практични умения — може да те накарат да построиш нещо или да дебъгнеш код. FAANG е почти изцяло алгоритмично. Готви се и за двете: LeetCode за FAANG, странични проекти за стартъпи.',
     author: MOCK_USERS[0],
     createdAt: daysAgo(1),
     score: 22,
@@ -70,7 +70,7 @@ function createSeedThreads(): Thread[] {
   const reply3b: Reply = {
     id: crypto.randomUUID(),
     threadId: '',
-    body: 'Do not forget system design for FAANG if you are applying for anything above entry level. For startups, being able to talk about your projects in depth matters a lot.',
+    body: 'Не забравяй system design за FAANG, ако кандидатстваш за позиция над начално ниво. За стартъпи е важно да можеш да говориш подробно за проектите си.',
     author: MOCK_USERS[2],
     createdAt: daysAgo(0.5),
     score: 9,
@@ -80,7 +80,7 @@ function createSeedThreads(): Thread[] {
   const reply5a: Reply = {
     id: crypto.randomUUID(),
     threadId: '',
-    body: 'A Math minor is genuinely useful for CS grad school, especially if you are interested in ML, theory, or graphics. The linear algebra and discrete math foundations matter.',
+    body: 'Математическият минор наистина помага за магистратура по CS, особено ако те интересуват ML, теория или графика. Основите по линейна алгебра и дискретна математика са важни.',
     author: MOCK_USERS[1],
     createdAt: daysAgo(6),
     score: 18,
@@ -90,7 +90,7 @@ function createSeedThreads(): Thread[] {
   const reply6a: Reply = {
     id: crypto.randomUUID(),
     threadId: '',
-    body: 'The 4th floor of the Engineering building is almost always empty after 5pm. Has great natural light and plenty of outlets.',
+    body: '4-тият етаж на Инженерния факултет почти винаги е празен след 17ч. Има страхотна естествена светлина и много контакти.',
     author: MOCK_USERS[3],
     createdAt: daysAgo(0.2),
     score: 7,
@@ -100,8 +100,8 @@ function createSeedThreads(): Thread[] {
   return [
     {
       id: crypto.randomUUID(),
-      title: 'How do you approach studying for a cumulative final exam?',
-      body: 'I have a cumulative final in Linear Algebra covering everything from vector spaces to eigenvalues. The professor said it will be "conceptual" rather than calculation-heavy. How do you prepare for that kind of exam when there is so much material to review?',
+      title: 'Как подхождате към ученето за общ финален изпит?',
+      body: 'Имам общ финален изпит по Линейна алгебра, който покрива всичко от векторни пространства до собствени стойности. Професорът каза, че ще е „концептуален", а не с много сметки. Как се подготвяте за такъв изпит, когато има толкова много материал?',
       author: MOCK_USERS[0],
       category: 'exam-prep',
       tags: ['linear-algebra', 'final-exam', 'study-strategy'],
@@ -115,8 +115,8 @@ function createSeedThreads(): Thread[] {
     },
     {
       id: crypto.randomUUID(),
-      title: 'Best resources for learning React hooks from scratch?',
-      body: 'I am taking a web development course and we just started React hooks. The textbook only covers class components. Can anyone recommend good resources for learning useState, useEffect, and custom hooks? Bonus points if they include practical projects.',
+      title: 'Най-добри ресурси за учене на React hooks от нулата?',
+      body: 'Карам курс по уеб програмиране и току-що започнахме React hooks. Учебникът покрива само class components. Може ли някой да препоръча добри ресурси за useState, useEffect и custom hooks? Бонус, ако включват практични проекти.',
       author: MOCK_USERS[1],
       category: 'homework',
       tags: ['react', 'hooks', 'web-dev'],
@@ -130,8 +130,8 @@ function createSeedThreads(): Thread[] {
     },
     {
       id: crypto.randomUUID(),
-      title: 'Tips for technical interviews at startups vs big tech?',
-      body: 'I have interviews coming up at both a YC startup and a FAANG company. Are the interview processes really that different? Should I prepare differently for each? I have been grinding LeetCode but I am not sure if that is enough for the startup.',
+      title: 'Съвети за технически интервюта — стартъп срещу голяма компания?',
+      body: 'Имам интервюта в YC стартъп и FAANG компания. Процесите наистина ли са толкова различни? Трябва ли да се готвя различно за всяко? Решавам задачи в LeetCode, но не съм сигурен дали стига за стартъпа.',
       author: MOCK_USERS[3],
       category: 'career',
       tags: ['interviews', 'startups', 'faang'],
@@ -145,8 +145,8 @@ function createSeedThreads(): Thread[] {
     },
     {
       id: crypto.randomUUID(),
-      title: 'How to structure a group project when everyone has different schedules?',
-      body: 'We are a team of 5 for our Software Engineering project and nobody can agree on meeting times. Two people work part-time jobs, one has evening classes. We are falling behind. Any tools or strategies for async collaboration?',
+      title: 'Как да организираме групов проект, когато всички имат различни графици?',
+      body: 'Екип от 5 души сме за проекта по Софтуерно инженерство и никой не може да се съгласи за часове за среща. Двама работят на непълен работен ден, един има вечерни занятия. Изоставаме. Някакви инструменти или стратегии за асинхронна работа?',
       author: MOCK_USERS[4],
       category: 'project',
       tags: ['group-work', 'collaboration', 'time-management'],
@@ -159,8 +159,8 @@ function createSeedThreads(): Thread[] {
     },
     {
       id: crypto.randomUUID(),
-      title: 'Is it worth getting a minor in CS if I am already a CS major?',
-      body: 'My advisor suggested I could pick up a Math minor with just 3 more courses since I have already taken most of the prerequisites. Would a Math minor actually help with grad school applications or is it better to use those credits for CS electives?',
+      title: 'Струва ли си да взема минор по математика, ако съм специалност CS?',
+      body: 'Моят научен ръководител предложи да взема минор по математика само с 3 допълнителни курса, понеже вече съм взел повечето prerequisites. Минор по математика наистина ли помага за магистратура или е по-добре да използвам кредитите за CS избираеми?',
       author: MOCK_USERS[2],
       category: 'career',
       tags: ['minor', 'grad-school', 'math'],
@@ -174,8 +174,8 @@ function createSeedThreads(): Thread[] {
     },
     {
       id: crypto.randomUUID(),
-      title: 'Where is the best quiet study spot on campus?',
-      body: 'The library is always packed during midterms. I need a quiet place where I can spread out my notes and not be disturbed for 3-4 hours. Bonus if it has good WiFi and outlets. What are your hidden gems?',
+      title: 'Къде е най-доброто тихо място за учене в кампуса?',
+      body: 'Библиотеката винаги е препълнена по време на междинните изпити. Трябва ми тихо място, където да разпростра бележките си и да не ме безпокоят 3-4 часа. Бонус, ако има добър WiFi и контакти. Кои са вашите скрити места?',
       author: MOCK_USERS[0],
       category: 'campus-life',
       tags: ['study-spots', 'campus'],

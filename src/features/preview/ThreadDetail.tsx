@@ -18,13 +18,13 @@ import type { Reply, Thread, VoteDirection } from '@/types';
 function relativeTime(isoDate: string): string {
   const diff = Date.now() - new Date(isoDate).getTime();
   const minutes = Math.floor(diff / 60_000);
-  if (minutes < 1) return 'just now';
-  if (minutes < 60) return `${minutes}m ago`;
+  if (minutes < 1) return 'току-що';
+  if (minutes < 60) return `преди ${minutes}мин`;
   const hours = Math.floor(minutes / 60);
-  if (hours < 24) return `${hours}h ago`;
+  if (hours < 24) return `преди ${hours}ч`;
   const days = Math.floor(hours / 24);
-  if (days < 30) return `${days}d ago`;
-  return `${Math.floor(days / 30)}mo ago`;
+  if (days < 30) return `преди ${days}д`;
+  return `преди ${Math.floor(days / 30)}мес`;
 }
 
 function getInitials(name: string): string {
@@ -116,7 +116,7 @@ function ReplyCard({
             className="inline-flex items-center gap-1 text-xs text-muted-foreground hover:text-emerald-500 transition-colors cursor-pointer px-2 py-1 rounded-md hover:bg-emerald-500/10"
           >
             <Check className="size-3" />
-            Accept as Answer
+            Приеми като отговор
           </button>
         )}
 
@@ -124,10 +124,10 @@ function ReplyCard({
           <button
             onClick={() => acceptReply(thread.id, reply.id)}
             className="inline-flex items-center gap-1 text-xs text-emerald-500/60 hover:text-emerald-500 transition-colors cursor-pointer px-2 py-1 rounded-md hover:bg-emerald-500/10"
-            title="Click to un-accept"
+            title="Натисни за отмяна"
           >
             <Check className="size-3" />
-            Accepted
+            Приет
           </button>
         )}
       </div>
@@ -153,10 +153,10 @@ export function ThreadDetail() {
           <MessageSquare className="size-6 text-muted-foreground" />
         </div>
         <h3 className="text-lg font-semibold font-[family-name:var(--font-display)] text-foreground mb-1">
-          Thread not found
+          Темата не е намерена
         </h3>
         <p className="text-sm text-muted-foreground mb-4">
-          This thread may have been deleted or doesn't exist.
+          Тази тема може да е изтрита или да не съществува.
         </p>
         <Button
           variant="outline"
@@ -164,7 +164,7 @@ export function ThreadDetail() {
           className="cursor-pointer gap-1.5"
         >
           <ArrowLeft className="size-4" />
-          Back to threads
+          Обратно към темите
         </Button>
       </div>
     );
@@ -175,7 +175,7 @@ export function ThreadDetail() {
   const threadDirection: VoteDirection = votes[threadVoteKey]?.direction ?? 0;
 
   function handleReply(body: string) {
-    addReply(thread!.id, body, { id: currentUserId, displayName: 'You' });
+    addReply(thread!.id, body, { id: currentUserId, displayName: 'Ти' });
   }
 
   function handleThreadVote(direction: VoteDirection) {
@@ -191,7 +191,7 @@ export function ThreadDetail() {
         className="cursor-pointer gap-1.5 -ml-2"
       >
         <ArrowLeft className="size-4" />
-        All Threads
+        Всички теми
       </Button>
 
       {/* Thread header */}
@@ -267,7 +267,7 @@ export function ThreadDetail() {
         <div className="flex items-center gap-2">
           <MessageSquare className="size-4 text-muted-foreground" />
           <h2 className="text-lg font-semibold font-[family-name:var(--font-display)] text-foreground">
-            {thread.replyCount} {thread.replyCount === 1 ? 'Reply' : 'Replies'}
+            {thread.replyCount} {thread.replyCount === 1 ? 'Отговор' : 'Отговора'}
           </h2>
         </div>
 
@@ -288,7 +288,7 @@ export function ThreadDetail() {
               animate={{ opacity: 1 }}
               className="text-sm text-muted-foreground py-8 text-center"
             >
-              No replies yet. Be the first to respond!
+              Все още няма отговори. Бъди първият, който ще отговори!
             </motion.p>
           )}
         </AnimatePresence>

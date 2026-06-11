@@ -5,8 +5,8 @@ import { APP_CONFIG } from '@/lib/constants';
 import { cn } from '@/lib/utils';
 
 const NAV_ITEMS = [
-  { to: '/', label: 'Home' },
-  { to: '/preview', label: 'Preview' },
+  { to: '/', label: 'Начало' },
+  { to: '/preview', label: 'Прототип' },
 ] as const;
 
 export function Navbar() {
@@ -14,7 +14,7 @@ export function Navbar() {
     <nav
       className="fixed top-4 left-4 right-4 z-40 mx-auto max-w-2xl"
       role="navigation"
-      aria-label="Main navigation"
+      aria-label="Основна навигация"
     >
       <div className="liquid-glass flex items-center justify-between rounded-2xl px-4 py-2.5 sm:px-6">
         {/* Logo / Wordmark */}

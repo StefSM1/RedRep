@@ -72,7 +72,7 @@ export function HeroSection() {
                   variant="outline"
                   className="cursor-pointer"
                   onClick={() => {
-                    document.getElementById('features')?.scrollIntoView({ behavior: 'smooth' });
+                    document.getElementById('architecture')?.scrollIntoView({ behavior: 'smooth' });
                   }}
                 >
                   Разгледай функциите

@@ -276,7 +276,7 @@ export function MonitoringSection() {
               <motion.text x="80" y="14" textAnchor="middle" fontSize="6" fontFamily="var(--font-mono)" fontWeight="700" fill={GREEN}
                 initial={{ opacity: 0 }} animate={hasEntered ? { opacity: 1 } : {}} transition={{ delay: 0.15 }}
                 style={{ filter: 'url(#mg-g)' }}
-              >req / sec</motion.text>
+              >заявки/сек</motion.text>
 
               {/* Chart frame */}
               <rect x="14" y="20" width="138" height="82" rx="4" fill={SURFACE} stroke={BORDER} strokeWidth="0.6" />
@@ -343,7 +343,7 @@ export function MonitoringSection() {
               <motion.text x="240" y="14" textAnchor="middle" fontSize="6" fontFamily="var(--font-mono)" fontWeight="700" fill={YELLOW}
                 initial={{ opacity: 0 }} animate={hasEntered ? { opacity: 1 } : {}} transition={{ delay: 0.2 }}
                 style={{ filter: 'url(#mg-y)' }}
-              >error rate</motion.text>
+              >грешки</motion.text>
 
               {/* Chart frame */}
               <rect x="165" y="20" width="150" height="82" rx="4" fill={SURFACE} stroke={BORDER} strokeWidth="0.6" />
@@ -435,7 +435,7 @@ export function MonitoringSection() {
               <motion.text x="400" y="14" textAnchor="middle" fontSize="6" fontFamily="var(--font-mono)" fontWeight="700" fill={BLUE}
                 initial={{ opacity: 0 }} animate={hasEntered ? { opacity: 1 } : {}} transition={{ delay: 0.25 }}
                 style={{ filter: 'url(#mg-b)' }}
-              >p99 latency</motion.text>
+              >p99 закъснение</motion.text>
 
               {/* Chart frame */}
               <rect x="328" y="20" width="142" height="82" rx="4" fill={SURFACE} stroke={BORDER} strokeWidth="0.6" />
@@ -530,7 +530,7 @@ export function MonitoringSection() {
               <circle cx="22" cy="130" r="1.5" fill="oklch(0.65 0.22 25)" />
               <circle cx="28" cy="130" r="1.5" fill="oklch(0.75 0.18 70)" />
               <circle cx="34" cy="130" r="1.5" fill="oklch(0.70 0.18 155)" />
-              <text x="48" y="132" fontSize="3.5" fontFamily="var(--font-mono)" fill="oklch(0.60 0.02 260)">logs</text>
+              <text x="48" y="132" fontSize="3.5" fontFamily="var(--font-mono)" fill="oklch(0.60 0.02 260)">логове</text>
 
               {/* Log lines — each visible phase adds a line */}
               {PHASES.map((phase, i) => {

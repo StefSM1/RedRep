@@ -413,7 +413,7 @@ export function ContainerSection() {
                 style={{ transformOrigin: '310px 72px' }}
               >
                 <rect x="258" y="68" width="104" height="10" rx="3" fill="oklch(0.18 0.04 155 / 0.5)" stroke={G3} strokeWidth="0.7" />
-                <text x="310" y="75.5" textAnchor="middle" fontSize="4" fontFamily="var(--font-mono)" fontWeight="600" fill="oklch(0.92 0.01 260)">Load Balancer</text>
+                <text x="310" y="75.5" textAnchor="middle" fontSize="4" fontFamily="var(--font-mono)" fontWeight="600" fill="oklch(0.92 0.01 260)">Балансьор</text>
               </motion.g>
 
               {/* Incoming traffic arrows — originate from the registry pull path */}
@@ -430,7 +430,7 @@ export function ContainerSection() {
                   transition={{ delay: 1.3, duration: 0.5 }}
                   style={{ filter: 'url(#cg)' }}
                 />
-                <text x="238" y="64" textAnchor="middle" fontSize="3.2" fontFamily="var(--font-mono)" fill="oklch(0.60 0.02 260)">traffic</text>
+                <text x="238" y="64" textAnchor="middle" fontSize="3.2" fontFamily="var(--font-mono)" fill="oklch(0.60 0.02 260)">трафик</text>
               </motion.g>
 
               {/* Labels */}
@@ -457,7 +457,7 @@ export function ContainerSection() {
               >
                 <rect x="380" y="40" width="26" height="36" rx="3" fill={SURFACE} stroke={G3} strokeWidth="0.9" style={{ filter: 'url(#cg3)' }} />
                 <circle cx="393" cy="68" r="2.5" fill={G3} />
-                <text x="393" y="86" textAnchor="middle" fontSize="3.5" fontFamily="var(--font-mono)" fill={G3}>healthy</text>
+                <text x="393" y="86" textAnchor="middle" fontSize="3.5" fontFamily="var(--font-mono)" fill={G3}>здрав</text>
               </motion.g>
 
               {/* Failing container: green → red pulse → X */}
@@ -491,7 +491,7 @@ export function ContainerSection() {
                   <line x1="423" y1="50" x2="433" y2="62" stroke="oklch(0.65 0.22 25)" strokeWidth="1.8" strokeLinecap="round" />
                   <line x1="433" y1="50" x2="423" y2="62" stroke="oklch(0.65 0.22 25)" strokeWidth="1.8" strokeLinecap="round" />
                 </motion.g>
-                <text x="428" y="86" textAnchor="middle" fontSize="3.5" fontFamily="var(--font-mono)" fill="oklch(0.65 0.22 25)">failing</text>
+                <text x="428" y="86" textAnchor="middle" fontSize="3.5" fontFamily="var(--font-mono)" fill="oklch(0.65 0.22 25)">повреда</text>
               </motion.g>
 
               {/* Replacement container: appears after failure */}
@@ -506,7 +506,7 @@ export function ContainerSection() {
                 <rect x="450" y="40" width="26" height="36" rx="3" fill={SURFACE} stroke={G3} strokeWidth="0.9"
                   style={{ filter: 'url(#cg3)' }} />
                 <circle cx="463" cy="68" r="2.5" fill={G3} />
-                <text x="463" y="86" textAnchor="middle" fontSize="3.5" fontFamily="var(--font-mono)" fill={G3}>replaced</text>
+                <text x="463" y="86" textAnchor="middle" fontSize="3.5" fontFamily="var(--font-mono)" fill={G3}>заменен</text>
               </motion.g>
 
               {/* Health check wave lines from monitor */}
@@ -538,7 +538,7 @@ export function ContainerSection() {
                 animate={vis(3) ? { opacity: 1 } : {}}
                 transition={{ delay: 2.2 }}
                 style={{ filter: 'url(#cg4)' }}
-              >auto-restart ✓</motion.text>
+              >авто-рестарт ✓</motion.text>
             </g>
           </svg>
         </div>

@@ -14,10 +14,10 @@ export function PreviewPage() {
       {!isDetailView && (
         <div className="flex items-center gap-2 mb-4">
           <h2 className="text-lg font-semibold font-[family-name:var(--font-display)] text-foreground">
-            RedRep Forum
+            RedRep Форум
           </h2>
           <Badge variant="secondary" className="text-[10px]">
-            {threads.length} threads
+            {threads.length} теми
           </Badge>
         </div>
       )}

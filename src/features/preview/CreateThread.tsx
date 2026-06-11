@@ -33,7 +33,6 @@ import type { Category } from '@/types';
 
 /* ---------- Constants ---------- */
 const TITLE_MAX = 200;
-const BODY_MIN = 20;
 
 /* ---------- Form state ---------- */
 interface FormData {
@@ -85,13 +84,11 @@ export function CreateThread() {
 
   function validate(): FormErrors {
     const e: FormErrors = {};
-    if (!form.title.trim()) e.title = 'Title is required.';
+    if (!form.title.trim()) e.title = 'Заглавието е задължително.';
     else if (form.title.length > TITLE_MAX)
-      e.title = `Title must be ${TITLE_MAX} characters or less.`;
-    if (!form.body.trim()) e.body = 'Body is required.';
-    else if (form.body.trim().length < BODY_MIN)
-      e.body = `Body must be at least ${BODY_MIN} characters.`;
-    if (!form.category) e.category = 'Please select a category.';
+      e.title = `Заглавието трябва да е до ${TITLE_MAX} символа.`;
+    if (!form.body.trim()) e.body = 'Съдържанието е задължително.';
+    if (!form.category) e.category = 'Моля, избери категория.';
     return e;
   }
 
@@ -113,7 +110,7 @@ export function CreateThread() {
       .map((t) => t.trim().toLowerCase().replace(/^#/, ''))
       .filter(Boolean);
 
-    const mockUser = { id: 'current-user', displayName: 'You' };
+    const mockUser = { id: 'current-user', displayName: 'Ти' };
 
     const newId = createThread({
       title: form.title.trim(),
@@ -125,7 +122,7 @@ export function CreateThread() {
 
     setOpen(false);
     setIsSubmitting(false);
-    toast.success('Thread created!');
+    toast.success('Темата е създадена!');
 
     // Navigate directly to the new thread
     navigate(`/preview/${newId}`);
@@ -148,10 +145,10 @@ export function CreateThread() {
     <form onSubmit={handleSubmit} className="space-y-5">
       {/* Title */}
       <div className="space-y-1.5">
-        <Label htmlFor="thread-title">Title</Label>
+        <Label htmlFor="thread-title">Заглавие</Label>
         <Input
           id="thread-title"
-          placeholder="What's your question?"
+          placeholder="Какъв е въпросът ти?"
           value={form.title}
           onChange={(e) => updateField('title', e.target.value)}
           disabled={isSubmitting}
@@ -172,10 +169,10 @@ export function CreateThread() {
 
       {/* Body */}
       <div className="space-y-1.5">
-        <Label htmlFor="thread-body">Body</Label>
+        <Label htmlFor="thread-body">Съдържание</Label>
         <Textarea
           id="thread-body"
-          placeholder="Describe your question in detail… (min 20 characters)"
+          placeholder="Опиши въпроса си подробно…"
           value={form.body}
           onChange={(e) => updateField('body', e.target.value)}
           disabled={isSubmitting}
@@ -189,21 +186,21 @@ export function CreateThread() {
             <span />
           )}
           <span className="text-muted-foreground">
-            {form.body.length} chars{form.body.length > 0 && form.body.length < BODY_MIN ? ` (min ${BODY_MIN})` : ''}
+            {form.body.length} символа
           </span>
         </div>
       </div>
 
       {/* Category */}
       <div className="space-y-1.5">
-        <Label>Category</Label>
+        <Label>Категория</Label>
         <Select
           value={form.category || undefined}
           onValueChange={(val: string | null) => { if (val) updateField('category', val as Category); }}
           disabled={isSubmitting}
         >
           <SelectTrigger className="w-full" aria-invalid={!!errors.category}>
-            <SelectValue placeholder="Select a category" />
+            <SelectValue placeholder="Избери категория" />
           </SelectTrigger>
           <SelectContent>
             {CATEGORIES.map((cat) => {
@@ -223,16 +220,16 @@ export function CreateThread() {
 
       {/* Tags */}
       <div className="space-y-1.5">
-        <Label htmlFor="thread-tags">Tags</Label>
+        <Label htmlFor="thread-tags">Тагове</Label>
         <Input
           id="thread-tags"
-          placeholder="e.g. react, hooks, web-dev (comma-separated)"
+          placeholder="напр. react, hooks, web-dev (разделени със запетая)"
           value={form.tags}
           onChange={(e) => updateField('tags', e.target.value)}
           disabled={isSubmitting}
         />
         <p className="text-xs text-muted-foreground">
-          Separate tags with commas
+          Разделяй таговете със запетаи
         </p>
       </div>
 
@@ -243,7 +240,7 @@ export function CreateThread() {
         className="w-full cursor-pointer gap-1.5"
       >
         <Plus className="size-4" />
-        {isSubmitting ? 'Creating…' : 'Create Thread'}
+        {isSubmitting ? 'Създаване…' : 'Създай тема'}
       </Button>
     </form>
   );
@@ -257,15 +254,15 @@ export function CreateThread() {
           className="cursor-pointer gap-1.5"
         >
           <Plus className="size-4" />
-          New Question
+          Нов въпрос
         </Button>
 
         <Sheet open={open} onOpenChange={setOpen}>
           <SheetContent side="bottom" className="max-h-[85vh] overflow-y-auto rounded-t-2xl p-6">
             <SheetHeader className="mb-4">
-              <SheetTitle>Ask a Question</SheetTitle>
+              <SheetTitle>Задай въпрос</SheetTitle>
               <SheetDescription>
-                Post your question to the community.
+                Публикувай въпроса си пред общността.
               </SheetDescription>
             </SheetHeader>
             {formContent}
@@ -282,15 +279,15 @@ export function CreateThread() {
         className="cursor-pointer gap-1.5"
       >
         <Plus className="size-4" />
-        New Question
+        Нов въпрос
       </Button>
 
       <Dialog open={open} onOpenChange={setOpen}>
         <DialogContent className="sm:max-w-lg">
           <DialogHeader>
-            <DialogTitle>Ask a Question</DialogTitle>
+            <DialogTitle>Задай въпрос</DialogTitle>
             <DialogDescription>
-              Post your question to the community.
+              Публикувай въпроса си пред общността.
             </DialogDescription>
           </DialogHeader>
           {formContent}

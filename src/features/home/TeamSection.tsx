@@ -17,9 +17,14 @@ const TECH_STACK = [
 
 const TEAM = [
   {
-    name: 'Student Developer',
-    role: 'Full-Stack Engineer & UI/UX Designer',
-    initials: 'SD',
+    name: 'Стефан Стоянов',
+    role: 'Full-Stack инженер & UI/UX дизайнер',
+    initials: 'СС',
+  },
+  {
+    name: 'Павел Кочев',
+    role: 'Емоционална подкрепа',
+    initials: 'ПК',
   },
 ] as const;
 
@@ -56,10 +61,10 @@ export function TeamSection() {
       >
         {/* Section header */}
         <motion.div variants={itemVariants} className="text-center">
-          <h2 className="mb-3">About RedRep</h2>
+          <h2 className="mb-3">За RedRep</h2>
           <p className="mx-auto max-w-lg text-muted-foreground">
-            A university project exploring what a modern academic Q&A platform
-            can look like when UI/UX quality is the top priority.
+            Университетски проект, изследващ как може да изглежда една модерна
+            академична Q&A платформа, когато UI/UX качеството е приоритет.
           </p>
         </motion.div>
 
@@ -69,28 +74,21 @@ export function TeamSection() {
           whileHover={{ scale: 1.02 }}
           className="liquid-glass rounded-2xl p-6 sm:p-8 cursor-default"
         >
-          <div className="flex items-start gap-4 mb-5">
+          <div className="flex items-start gap-4">
             <div className="flex size-11 shrink-0 items-center justify-center rounded-xl bg-accent/15 text-accent">
               <GraduationCap className="size-5" />
             </div>
             <div>
               <h3 className="text-lg font-semibold font-[family-name:var(--font-display)] text-foreground mb-2">
-                Why RedRep?
+                Защо RedRep?
               </h3>
               <p className="leading-relaxed">
-                Students deserve better than clunky forum software from 2005.
-                RedRep reimagines the academic Q&A experience with the polish of
-                modern web applications — fast, beautiful, and designed for how
-                students actually ask questions and share knowledge.
+                Студентите заслужават по-добро от форум софтуер от 2005-та.
+                RedRep преосмисля академичния Q&A опит с бързина, красота
+                и внимание към начина, по който студентите наистина учат.
               </p>
             </div>
           </div>
-          <p className="leading-relaxed">
-            Built as a showcase project demonstrating architecture design,
-            responsive UI engineering, accessibility best practices, and
-            thoughtful interaction design — all within a single-page application
-            with no backend dependencies.
-          </p>
         </motion.div>
 
         {/* Team card */}
@@ -120,7 +118,7 @@ export function TeamSection() {
         {/* Tech stack badges */}
         <motion.div variants={itemVariants} className="text-center">
           <p className="text-xs uppercase tracking-widest text-muted-foreground mb-3">
-            Built With
+            Изградено с
           </p>
           <div className="flex flex-wrap justify-center gap-2">
             {TECH_STACK.map((tech) => (

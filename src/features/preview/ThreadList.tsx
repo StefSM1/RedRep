@@ -20,13 +20,13 @@ import type { Category, Thread, ThreadSort, VoteDirection } from "@/types";
 function relativeTime(isoDate: string): string {
   const diff = Date.now() - new Date(isoDate).getTime();
   const minutes = Math.floor(diff / 60_000);
-  if (minutes < 1) return "just now";
-  if (minutes < 60) return `${minutes}m ago`;
+  if (minutes < 1) return "току-що";
+  if (minutes < 60) return `преди ${minutes}мин`;
   const hours = Math.floor(minutes / 60);
-  if (hours < 24) return `${hours}h ago`;
+  if (hours < 24) return `преди ${hours}ч`;
   const days = Math.floor(hours / 24);
-  if (days < 30) return `${days}d ago`;
-  return `${Math.floor(days / 30)}mo ago`;
+  if (days < 30) return `преди ${days}д`;
+  return `преди ${Math.floor(days / 30)}мес`;
 }
 
 function getInitials(name: string): string {
@@ -184,7 +184,7 @@ export function ThreadList() {
           <div className="relative flex-1 min-w-[180px]">
             <Search className="absolute left-3 top-1/2 size-3.5 -translate-y-1/2 text-muted-foreground pointer-events-none" />
             <Input
-              placeholder="Search threads…"
+              placeholder="Търси теми…"
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
               className="pl-8 h-8 text-xs"
@@ -206,7 +206,7 @@ export function ThreadList() {
             className="cursor-pointer transition-colors shrink-0 text-[10px]"
             onClick={() => setActiveCategory(null)}
           >
-            All
+            Всички
           </Badge>
           {CATEGORIES.map((cat) => {
             const cfg = CATEGORY_CONFIG[cat];
@@ -233,7 +233,7 @@ export function ThreadList() {
           {isFiltered && (
             <div className="flex items-center gap-3">
               <p className="text-xs text-muted-foreground">
-                Showing {sorted.length} of {threads.length} threads
+                Показани {sorted.length} от {threads.length} теми
               </p>
               <button
                 onClick={() => {
@@ -243,7 +243,7 @@ export function ThreadList() {
                 className="inline-flex items-center gap-1 text-xs text-muted-foreground hover:text-foreground transition-colors cursor-pointer"
               >
                 <RotateCcw className="size-3" />
-                Clear filters
+                Изчисти филтрите
               </button>
             </div>
           )}
@@ -274,12 +274,12 @@ export function ThreadList() {
                   <Search className="size-6 text-muted-foreground" />
                 </div>
                 <h3 className="text-lg font-semibold font-[family-name:var(--font-display)] text-foreground mb-1">
-                  No threads found
+                  Няма намерени теми
                 </h3>
                 <p className="text-sm text-muted-foreground max-w-xs">
                   {isFiltered
-                    ? "Try adjusting your search or filters."
-                    : "Be the first to ask a question!"}
+                    ? "Опитай да промениш търсенето или филтрите."
+                    : "Бъди първият, който ще зададе въпрос!"}
                 </p>
               </motion.div>
             )}
