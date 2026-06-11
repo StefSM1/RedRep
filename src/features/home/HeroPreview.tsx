@@ -5,35 +5,35 @@ import { ArrowUp, ArrowDown, MessageSquare, BadgeCheck } from 'lucide-react';
 const MOCK_THREADS = [
   {
     id: '1',
-    title: 'How do you approach studying for a cumulative final?',
-    category: 'Exam Prep',
+    title: 'Как подхождате към ученето за общ финален изпит?',
+    category: 'Подготовка за изпит',
     categoryColor: 'oklch(0.55 0.22 25)',
     score: 32,
     replies: 2,
-    author: 'Alice Chen',
-    initials: 'AC',
+    author: 'Алиса Чен',
+    initials: 'АЧ',
     hasAccepted: true,
   },
   {
     id: '2',
-    title: 'Best resources for learning React hooks?',
-    category: 'Homework',
+    title: 'Най-добри ресурси за учене на React hooks?',
+    category: 'Домашни',
     categoryColor: 'oklch(0.75 0.18 70)',
     score: 21,
     replies: 1,
-    author: 'Marcus R.',
-    initials: 'MR',
+    author: 'Маркус Р.',
+    initials: 'МР',
     hasAccepted: true,
   },
   {
     id: '3',
-    title: 'Tips for technical interviews at startups?',
-    category: 'Career',
+    title: 'Съвети за технически интервюта в стартъпи?',
+    category: 'Кариера',
     categoryColor: 'oklch(0.60 0.18 330)',
     score: 45,
     replies: 2,
-    author: 'Jake T.',
-    initials: 'JT',
+    author: 'Джейк Т.',
+    initials: 'ДТ',
     hasAccepted: false,
   },
 ];
@@ -92,7 +92,7 @@ function MockThreadCard({
             {thread.hasAccepted && (
               <div className="flex items-center gap-0.5 text-emerald-500">
                 <BadgeCheck className="size-2.5" />
-                <span className="text-[8px] font-medium">Best Answer</span>
+                <span className="text-[8px] font-medium">Най-добър</span>
               </div>
             )}
           </div>
@@ -137,7 +137,7 @@ export function HeroPreview() {
             </div>
             <div className="flex-1 text-center">
               <span className="text-[9px] text-muted-foreground font-mono">
-                redrep.app/preview
+                redrep.vercel.app
               </span>
             </div>
           </div>
@@ -147,14 +147,14 @@ export function HeroPreview() {
             {/* Mini header */}
             <div className="flex items-center justify-between mb-1">
               <span className="text-[10px] font-semibold font-[family-name:var(--font-display)] text-foreground">
-                RedRep Forum
+                RedRep Форум
               </span>
               <div className="flex gap-1">
-                {['Hot', 'New', 'Top'].map((tab) => (
+                {['Популярни', 'Нови', 'Топ'].map((tab) => (
                   <span
                     key={tab}
                     className={`text-[8px] px-1.5 py-0.5 rounded ${
-                      tab === 'Hot'
+                      tab === 'Популярни'
                         ? 'bg-accent/20 text-accent font-medium'
                         : 'text-muted-foreground/50'
                     }`}
